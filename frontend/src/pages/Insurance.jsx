@@ -1,95 +1,40 @@
 import { Eyebrow } from "../components/shared/Eyebrow";
 import CTABand from "../components/shared/CTABand";
-import { Cpu, Shield, TrendingUp, Rocket, Network, Activity } from "lucide-react";
 
-const capabilities = [
-    { icon: Cpu, t: "Digital claims engine", d: "Submission, adjudication, and settlement on a single auditable pipeline — configurable to each product and benefit rule." },
-    { icon: Shield, t: "AI-based control layer", d: "Automated validation, anomaly detection and fraud signals — working before payout, not after." },
-    { icon: Network, t: "Nationwide provider network", d: "A managed hospital, doctor, and pharmacy network — coded, contracted, and cashless-ready." },
-    { icon: TrendingUp, t: "Efficiency and scalability", d: "Architected to absorb growth in lives covered without linear growth in operating cost." },
-    { icon: Rocket, t: "Speed to market", d: "Launch new products and benefit structures without rebuilding your operating stack." },
-    { icon: Activity, t: "Customer experience", d: "Cleaner member journeys, faster approvals, and transparent communication." },
-];
-
-const manage = [
-    "Claims intake and adjudication",
-    "Network contracting and coordination",
-    "Pre-authorization workflows",
-    "Member eligibility and onboarding",
-    "Fraud, waste and abuse signals",
-    "Utilization and cost reporting",
-    "Call centre and query resolution",
-    "Provider settlement and reconciliation",
-];
+const bullets = (arr) => arr.map((x,i)=><li key={i} className="flex gap-2 text-sm text-mentor-muted"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>);
 
 export default function Insurance() {
     return (
         <>
-            <section className="border-b border-mentor-line" data-testid="ins-hero">
-                <div className="container-edge py-20 md:py-28">
-                    <Eyebrow>For Insurance Companies</Eyebrow>
-                    <h1 className="display-1 mt-6 max-w-4xl">The claims, network, and control layer your carrier deserves.</h1>
-                    <p className="lead mt-6 max-w-2xl">Plug Mentor TPA into your health portfolio and operate with the efficiency of a cloud-native platform — without rebuilding your core.</p>
-                </div>
-            </section>
+            <section className="border-b border-mentor-line"><div className="container-edge py-20 md:py-28"><Eyebrow>For Insurance Companies</Eyebrow><h1 className="display-1 mt-6 max-w-4xl">Claims and network infrastructure for insurers.</h1><p className="lead mt-6 max-w-2xl">Scale faster, reduce operational burden, and improve claims control through Mentor TPA's digital claims and provider network infrastructure.</p><div className="mt-8 flex flex-wrap gap-3"><a href="/request-proposal" className="rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white hover:bg-mentor-blue" data-testid="ins-cta-integrate">Explore Integration</a><a href="/book-demo" className="rounded-full border border-mentor-black px-6 py-3.5 text-sm font-semibold">Run a Pilot</a></div></div></section>
 
-            <section className="py-20 md:py-28">
-                <div className="container-edge grid gap-10 md:grid-cols-2">
-                    <div className="card-hard p-8">
-                        <Eyebrow>The challenge</Eyebrow>
-                        <div className="mt-4 text-3xl font-extrabold tracking-tight">Traditional models don't scale.</div>
-                        <p className="mt-4 text-sm leading-relaxed text-mentor-muted">Legacy TPAs lean on manual workflows, fragmented systems, and opaque provider relationships. That makes it hard to control cost, hard to spot fraud, and hard to launch new products quickly.</p>
-                    </div>
-                    <div className="card-hard p-8">
-                        <Eyebrow>The hidden risk</Eyebrow>
-                        <div className="mt-4 text-3xl font-extrabold tracking-tight">Leakage is the silent line item.</div>
-                        <p className="mt-4 text-sm leading-relaxed text-mentor-muted">Without real-time validation and data-led oversight, small inefficiencies compound across thousands of claims — eroding loss ratios quietly until renewal.</p>
-                    </div>
-                </div>
-            </section>
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2">
+                <div><Eyebrow>The challenge</Eyebrow><h2 className="display-2 mt-5">The insurance challenge.</h2><p className="lead mt-5">Insurance companies are under growing pressure from rising claims volumes, increasing operating cost, customer dissatisfaction, and demand for faster service. Claims management is becoming an operational bottleneck.</p></div>
+                <div><Eyebrow>The core problem</Eyebrow><h2 className="display-2 mt-5">Traditional claims operations do not scale well.</h2><p className="lead mt-5">The conventional model depends on large internal teams, manual review, fragmented provider relationships, and slow coordination. That creates higher overhead, slower turnaround, and lower scalability.</p></div>
+            </div></section>
 
-            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
-                <div className="container-edge">
-                    <Eyebrow>Mentor TPA for insurers</Eyebrow>
-                    <h2 className="display-2 mt-5 max-w-3xl">Six capabilities, one coordinated operating layer.</h2>
-                    <div className="mt-12 grid gap-4 md:grid-cols-3">
-                        {capabilities.map((c, i) => (
-                            <div key={i} className="rounded-2xl border border-mentor-line bg-white p-7">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white"><c.icon className="h-5 w-5" /></div>
-                                <div className="mt-5 text-lg font-extrabold tracking-tight">{c.t}</div>
-                                <p className="mt-3 text-sm leading-relaxed text-mentor-muted">{c.d}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge max-w-4xl"><Eyebrow>Hidden risks</Eyebrow><h2 className="display-2 mt-5">The leakage is real.</h2><ul className="mt-8 space-y-2">{bullets(["duplicate claims","fraud patterns","inconsistent billing","low real-time visibility","weak provider coordination"])}</ul><p className="mt-6 text-sm text-mentor-muted">Financial leakage does not always announce itself. It quietly accumulates in the background.</p></div></section>
 
-            <section className="py-20 md:py-28">
-                <div className="container-edge grid gap-12 md:grid-cols-[1fr,1.2fr] md:items-center">
-                    <div>
-                        <Eyebrow>What we manage</Eyebrow>
-                        <h2 className="display-2 mt-5">The end-to-end admin stack — so you can focus on underwriting and growth.</h2>
-                    </div>
-                    <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-                        {manage.map((m, i) => (
-                            <div key={i} className="flex items-start gap-3 rounded-xl border border-mentor-line p-4">
-                                <div className="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-mentor-blue" />
-                                <div className="text-sm font-semibold">{m}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <section className="py-20 md:py-28"><div className="container-edge max-w-4xl"><Eyebrow>Mentor solution</Eyebrow><h2 className="display-2 mt-5">A complete claims and network infrastructure layer.</h2><p className="lead mt-5">Mentor TPA enables insurers with end-to-end claims management support, provider network access, digital workflows, and real-time operational visibility. You focus on underwriting and market growth. We strengthen execution.</p></div></section>
 
-            <section className="border-t border-mentor-line bg-mentor-black py-20 text-white md:py-28">
-                <div className="container-edge">
-                    <Eyebrow><span className="text-mentor-blue">Implementation</span></Eyebrow>
-                    <h2 className="display-2 mt-5 max-w-3xl text-white">Integration-first. Carrier-friendly.</h2>
-                    <p className="lead mt-5 max-w-2xl text-white/70" style={{ color: "rgba(255,255,255,0.75)" }}>We integrate with your core systems and reporting structures — keeping the carrier in control while Mentor TPA handles the operational lift.</p>
-                </div>
-            </section>
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge"><Eyebrow>What we manage</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">What we manage.</h2><div className="mt-10 grid gap-3 md:grid-cols-5">{["claims adjudication","cashless authorizations","reimbursement processing","provider coordination","member support"].map(x=>(<div key={x} className="rounded-xl border border-mentor-line bg-white p-5 text-sm font-semibold">{x}</div>))}</div></div></section>
 
-            <CTABand eyebrow="Insurance" headline="Let's talk portfolio economics." subline="Request a proposal or book a deep-dive with our team." testId="ins-cta" />
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2"><div><Eyebrow>Claims processing engine</Eyebrow><h2 className="display-2 mt-5">Digital claims processing engine.</h2><ul className="mt-6 space-y-2">{bullets(["digital claim submission","structured validation workflows","faster review cycles","reduced turnaround time","better traceability across stages"])}</ul></div><div><Eyebrow>AI-based control layer</Eyebrow><h2 className="display-2 mt-5">AI-enabled control and validation.</h2><ul className="mt-6 space-y-2">{bullets(["duplicate claim identification","fraud detection mechanisms","image modification checks","OCR-based extraction","pricing comparison","utilization monitoring"])}</ul></div></div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-black py-20 text-white md:py-28"><div className="container-edge"><Eyebrow><span className="text-mentor-blue">Nationwide network</span></Eyebrow><h2 className="display-2 mt-5 max-w-3xl text-white">Pre-integrated provider ecosystem.</h2><div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">{[["300+","hospitals"],["15,000+","doctors"],["700+","labs"],["—","pharmacy network"]].map(([n,t],i)=>(<div key={i} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"><div className="stat-num text-white">{n}</div><div className="mt-2 text-sm text-white/70">{t}</div></div>))}</div><p className="mt-6 max-w-2xl text-sm text-white/70">Mentor TPA gives insurers a ready network layer instead of requiring them to rebuild provider coordination site by site.</p></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2"><div><Eyebrow>Efficiency</Eyebrow><h2 className="display-2 mt-5">Lower operational burden.</h2><div className="mt-6 grid grid-cols-1 gap-3"><div className="rounded-2xl border border-mentor-line p-5"><div className="text-xs font-bold uppercase tracking-[0.14em] text-mentor-muted">Without a strong TPA infrastructure</div><ul className="mt-3 space-y-1.5 text-sm">{["Larger internal claims teams","More manual coordination","Higher overhead","Slower turnaround"].map(x=><li key={x}>{x}</li>)}</ul></div><div className="rounded-2xl border border-mentor-blue bg-mentor-blue/5 p-5"><div className="text-xs font-bold uppercase tracking-[0.14em] text-mentor-blue">With Mentor TPA</div><ul className="mt-3 space-y-1.5 text-sm">{["Automated workflows","Centralized systems","Lower administrative burden","More scalable operations"].map(x=><li key={x}>{x}</li>)}</ul></div></div></div>
+            <div className="space-y-8"><div><Eyebrow>Scalability</Eyebrow><h2 className="display-2 mt-5">Scale claims operations without scaling cost at the same pace.</h2><p className="lead mt-5">Mentor TPA helps insurers handle growing claim volumes, enter new segments, and launch new healthcare products faster, without proportionally expanding internal claims operations.</p></div><div><Eyebrow>Speed to market</Eyebrow><h2 className="display-2 mt-5">Move faster.</h2><p className="lead mt-5">Instead of building every workflow internally from scratch, insurers can use Mentor TPA infrastructure to reduce implementation time and accelerate operational readiness.</p></div></div></div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2"><div><Eyebrow>Customer experience</Eyebrow><h2 className="display-2 mt-5">A better policyholder experience.</h2><ul className="mt-6 space-y-2">{bullets(["faster claim approvals","smoother cashless access","structured communication","higher trust and satisfaction"])}</ul></div><div><Eyebrow>Cost optimization</Eyebrow><h2 className="display-2 mt-5">Better claims control supports better profitability.</h2><ul className="mt-6 space-y-2">{bullets(["lower admin cost","reduced leakage","improved billing control","better visibility into claims patterns"])}</ul></div></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2"><div><Eyebrow>Loss ratio improvement</Eyebrow><h2 className="display-2 mt-5">Better data. Better control. Better decisions.</h2><p className="lead mt-5">Better claims control improves operational accuracy and supports better underwriting intelligence over time.</p></div><div><Eyebrow>Global insurers entering Pakistan</Eyebrow><h2 className="display-2 mt-5">Ready infrastructure for insurers entering Pakistan.</h2><p className="lead mt-5">For international insurers evaluating Pakistan, Mentor TPA provides local provider network infrastructure, claims handling capability, and market-grounded operational support without requiring a full buildout from zero on day one.</p></div></div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge"><Eyebrow>Why Mentor TPA</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">Why insurers choose Mentor TPA.</h2><div className="mt-10 grid gap-3 md:grid-cols-5">{["technology-first approach","nationwide provider network","AI-enabled claims control","scalable operational model","regulated environment readiness"].map(x=>(<div key={x} className="rounded-xl border border-mentor-line bg-white p-5 text-sm font-semibold">{x}</div>))}</div></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge"><Eyebrow>Implementation</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">Structured implementation model.</h2><div className="mt-10 grid gap-4 md:grid-cols-4">{["integration and onboarding","system configuration","pilot phase","full deployment"].map((s,i)=>(<div key={i} className="rounded-2xl border border-mentor-line p-6"><div className="eyebrow">Step {i+1}</div><p className="mt-3 text-sm font-semibold">{s}</p></div>))}</div></div></section>
+
+            <CTABand eyebrow="Final CTA" headline="Transform your claims operations." subline="Explore integration or run a pilot with Mentor TPA." testId="ins-cta" />
         </>
     );
 }

@@ -1,107 +1,58 @@
 import { Eyebrow } from "../components/shared/Eyebrow";
 import CTABand from "../components/shared/CTABand";
-import { CheckCircle2, Network, Eye, Coins, Users, Activity } from "lucide-react";
 
-const sections = [
-    { eyebrow: "The problem", title: "Current corporate healthcare is broken.", copy: "Most self-funded plans are run through disconnected vendors, delayed paper claims, and spreadsheets that can't keep up. HR becomes a helpdesk. Finance sees the bill only after it's too late to act." },
-    { eyebrow: "The hidden cost", title: "You can't control what you can't see.", copy: "Leakage, duplicate claims, over-utilization, and weak provider discipline don't show up on a summary report — but they show up on the renewal." },
-];
-
-const how = [
-    { n: "01", t: "Onboard the plan", d: "Members, eligibility, benefit design and rules configured on the Mentor platform." },
-    { n: "02", t: "Access the network", d: "Cashless, QR-verified visits across our contracted national provider network." },
-    { n: "03", t: "Run the claims engine", d: "Digital submission, automated validation, and auditable adjudication — end-to-end." },
-    { n: "04", t: "See and steer", d: "HR and finance dashboards with real utilization, cost and leakage signals." },
-];
-
-const levers = [
-    { icon: Network, t: "Network advantage", d: "Contracted hospitals, doctors, and pharmacies with negotiated structures and cashless access." },
-    { icon: Coins, t: "Cost control mechanisms", d: "Benefit rules, pre-authorization logic, and AI-based validation working together — before payout, not after." },
-    { icon: Activity, t: "Digital experience", d: "QR-verified visits, digital cards, and member-friendly access with no paper in the loop." },
-    { icon: Users, t: "HR and finance relief", d: "No more chasing paperwork or reconciling vendor statements — one dashboard, one source of truth." },
-    { icon: Eye, t: "Employee experience", d: "Clear benefits, faster approvals, and consistent service across the network." },
-    { icon: CheckCircle2, t: "Visibility and reporting", d: "Utilization, claim velocity, leakage indicators and renewal-ready data on demand." },
-];
-
-const steps = [
-    { t: "Discovery & design", d: "We understand your headcount, benefit intent, and current pain points." },
-    { t: "Plan configuration", d: "Eligibility, benefit rules, co-pays, and provider access configured on the platform." },
-    { t: "Member onboarding", d: "Digital cards issued, communication rolled out, providers informed." },
-    { t: "Go-live & steady state", d: "Cashless claims, dashboards, and ongoing account management." },
-];
+const bullets = (arr) => arr.map((x,i)=><li key={i} className="flex gap-2 text-sm text-mentor-muted"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>);
 
 export default function SelfFunded() {
     return (
         <>
-            <section className="border-b border-mentor-line" data-testid="sf-hero">
-                <div className="container-edge py-20 md:py-28">
-                    <Eyebrow>For Self-Funded Companies</Eyebrow>
-                    <h1 className="display-1 mt-6 max-w-4xl">A modern corporate health plan — finally under control.</h1>
-                    <p className="lead mt-6 max-w-2xl">One platform for your network, your claims, and your reporting. Improve cost efficiency, reduce leakage, strengthen visibility, and give your people a cleaner healthcare experience.</p>
-                </div>
-            </section>
+            <section className="border-b border-mentor-line"><div className="container-edge py-20 md:py-28"><Eyebrow>For Self-Funded Companies</Eyebrow><h1 className="display-1 mt-6 max-w-4xl">Take control of your healthcare costs.</h1><p className="lead mt-6 max-w-2xl">Mentor TPA turns self-funded healthcare into a structured, digital, and controllable system, helping companies reduce cost, improve visibility, and create a better employee experience.</p><a href="/request-proposal" data-testid="sf-cta-hero" className="mt-8 inline-flex items-center rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-mentor-blue">Request a Cost Assessment</a></div></section>
 
-            <section className="py-20 md:py-28">
-                <div className="container-edge grid gap-10 md:grid-cols-2">
-                    {sections.map((s, i) => (
-                        <div key={i} className="card-hard p-8">
-                            <Eyebrow>{s.eyebrow}</Eyebrow>
-                            <div className="mt-4 text-3xl font-extrabold tracking-tight">{s.title}</div>
-                            <p className="mt-4 text-sm leading-relaxed text-mentor-muted">{s.copy}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2">
+                <div><Eyebrow>The problem</Eyebrow><h2 className="display-2 mt-5">The problem with corporate healthcare today.</h2><p className="lead mt-5">Most companies are spending more on healthcare every year while seeing less control, less visibility, and more employee dissatisfaction. Insurance models increase cost over time. Reimbursement models create friction, delays, and HR burden. In both cases, healthcare is treated like an expense line, not a system.</p></div>
+                <ul className="space-y-3 rounded-2xl border border-mentor-line p-8">{bullets(["rising healthcare costs","no cost visibility","no control over spending","heavy HR involvement","weak claims oversight","poor employee experience"])}</ul>
+            </div></section>
 
-            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
-                <div className="container-edge">
-                    <Eyebrow>How it works</Eyebrow>
-                    <h2 className="display-2 mt-5 max-w-3xl">From onboarding to insight — one continuous loop.</h2>
-                    <div className="mt-12 grid gap-4 md:grid-cols-4">
-                        {how.map((h) => (
-                            <div key={h.n} className="relative rounded-2xl border border-mentor-line bg-white p-6">
-                                <div className="eyebrow">{h.n}</div>
-                                <div className="mt-4 text-lg font-extrabold tracking-tight">{h.t}</div>
-                                <p className="mt-3 text-sm leading-relaxed text-mentor-muted">{h.d}</p>
-                            </div>
-                        ))}
-                    </div>
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge">
+                <div className="max-w-3xl"><Eyebrow>Why current models fail</Eyebrow><h2 className="display-2 mt-5">Current healthcare models are broken.</h2></div>
+                <div className="mt-10 grid gap-5 md:grid-cols-2">
+                    <div className="rounded-2xl border border-mentor-line bg-white p-7"><div className="text-xl font-extrabold">Insurance model</div><ul className="mt-4 space-y-2">{bullets(["fixed premium model","limited control over usage","annual cost increases","weak operational visibility"])}</ul></div>
+                    <div className="rounded-2xl border border-mentor-line bg-white p-7"><div className="text-xl font-extrabold">Reimbursement model</div><ul className="mt-4 space-y-2">{bullets(["employee pays upfront","manual claims","slow reimbursement","operational burden on HR"])}</ul></div>
                 </div>
-            </section>
+                <p className="mt-8 text-sm text-mentor-muted">The result is high cost, low efficiency, and a poor employee experience.</p>
+            </div></section>
 
-            <section className="py-20 md:py-28">
-                <div className="container-edge">
-                    <Eyebrow>What you get</Eyebrow>
-                    <h2 className="display-2 mt-5 max-w-3xl">Six levers pulling in the same direction.</h2>
-                    <div className="mt-12 grid gap-4 md:grid-cols-3">
-                        {levers.map((l, i) => (
-                            <div key={i} className="card-hard p-7">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white"><l.icon className="h-5 w-5" /></div>
-                                <div className="mt-5 text-lg font-extrabold tracking-tight">{l.t}</div>
-                                <p className="mt-3 text-sm leading-relaxed text-mentor-muted">{l.d}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <section className="py-20 md:py-28"><div className="container-edge max-w-4xl"><Eyebrow>Hidden cost problem</Eyebrow><h2 className="display-2 mt-5">What you do not see is costing you money.</h2><p className="lead mt-5">The real problem is not just healthcare spend. The real problem is unmanaged spend.</p><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">{["overbilling","no negotiated rates","fraud and leakage","unnecessary utilization"].map((x,i)=>(<div key={i} className="card-hard p-6"><div className="eyebrow">0{i+1}</div><div className="mt-3 text-base font-extrabold">{x}</div></div>))}</div><p className="mt-8 text-sm text-mentor-muted">You may be paying far more than you should, without ever seeing the full picture.</p></div></section>
 
-            <section className="border-t border-mentor-line bg-mentor-black py-20 text-white md:py-28">
-                <div className="container-edge">
-                    <Eyebrow><span className="text-mentor-blue">Implementation</span></Eyebrow>
-                    <h2 className="display-2 mt-5 max-w-3xl text-white">A predictable four-step rollout.</h2>
-                    <div className="mt-12 grid gap-4 md:grid-cols-4">
-                        {steps.map((s, i) => (
-                            <div key={i} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                                <div className="text-xs font-bold uppercase tracking-[0.14em] text-mentor-blue">Step {i + 1}</div>
-                                <div className="mt-3 text-lg font-extrabold tracking-tight">{s.t}</div>
-                                <p className="mt-3 text-sm leading-relaxed text-white/70">{s.d}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <section className="border-y border-mentor-line bg-mentor-black py-20 text-white md:py-28"><div className="container-edge max-w-4xl"><Eyebrow><span className="text-mentor-blue">Mentor solution</span></Eyebrow><h2 className="display-2 mt-5 text-white">Mentor TPA converts self-funded healthcare into a managed system.</h2><p className="lead mt-5 text-white/75" style={{color:"rgba(255,255,255,0.75)"}}>We provide the infrastructure that self-funded healthcare usually lacks:</p><div className="mt-8 grid gap-3 md:grid-cols-5">{["provider network","claims control","cashless access","digital administration","real-time visibility"].map(x=>(<div key={x} className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm font-semibold">{x}</div>))}</div></div></section>
 
-            <CTABand eyebrow="Self-Funded" headline="Let's put your plan on a real operating layer." testId="sf-cta" />
+            <section className="py-20 md:py-28"><div className="container-edge"><Eyebrow>How it works</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">How it works.</h2>
+                <div className="mt-10 grid gap-4 md:grid-cols-4">{[["Step 1","Employees access network hospitals, clinics, labs, and pharmacies"],["Step 2","Treatment is delivered through a structured cashless workflow where applicable"],["Step 3","Mentor validates claims, coordinates providers, and applies control mechanisms"],["Step 4","Your company pays for actual usage, not inflated assumptions"]].map(([s,t],i)=>(<div key={i} className="rounded-2xl border border-mentor-line p-6"><div className="eyebrow">{s}</div><p className="mt-3 text-sm font-semibold">{t}</p></div>))}</div>
+                <p className="mt-6 text-sm font-semibold">Simple. Controlled. Transparent.</p>
+            </div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2 md:items-center"><div><Eyebrow>Network advantage</Eyebrow><h2 className="display-2 mt-5">The network advantage.</h2><p className="lead mt-5">Access to a structured network helps you move away from uncontrolled healthcare spending.</p></div><div className="grid grid-cols-2 gap-3">{[["300+","hospitals"],["15,000+","doctors"],["700+","labs"],["—","pharmacy network"]].map(([n,t],i)=>(<div key={i} className="rounded-2xl border border-mentor-line bg-white p-6"><div className="stat-num">{n}</div><div className="mt-2 text-sm text-mentor-muted">{t}</div></div>))}</div></div><p className="container-edge mx-auto mt-6 text-sm text-mentor-muted">Pre-negotiated pricing across participating providers.</p></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge"><Eyebrow>How we control cost</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">How we control cost.</h2>
+                <div className="mt-10 grid gap-3 md:grid-cols-2 lg:grid-cols-3">{["negotiated provider rates","AI-based claim validation","fraud detection","utilization tracking","structured healthcare workflows","every rupee tracked with greater visibility"].map((x,i)=>(<div key={i} className="rounded-xl border border-mentor-line p-5 text-sm font-semibold">{x}</div>))}</div>
+            </div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2"><div><Eyebrow>Digital experience</Eyebrow><h2 className="display-2 mt-5">No paperwork. No delays. No chaos.</h2><p className="lead mt-5">Mentor TPA digitizes the experience for both employers and employees.</p></div><ul className="space-y-2 rounded-2xl border border-mentor-line bg-white p-8">{bullets(["digital claims","mobile access","real-time claim tracking","cashless treatment flows","centralized user profiles","dashboard-based visibility"])}</ul></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge grid gap-10 md:grid-cols-2">
+                <div><Eyebrow>HR and finance relief</Eyebrow><h2 className="display-2 mt-5">Your HR team should not be running a healthcare operation.</h2><p className="lead mt-5">We handle claims processing, provider coordination, employee healthcare queries, and structured workflows so your HR and finance teams can focus on decision-making instead of operational firefighting.</p></div>
+                <div><Eyebrow>Employee experience</Eyebrow><h2 className="display-2 mt-5">A better healthcare journey for employees.</h2><div className="mt-6 grid grid-cols-2 gap-3"><div className="rounded-2xl border border-mentor-line p-5"><div className="text-xs font-bold uppercase tracking-[0.14em] text-mentor-muted">Before</div><ul className="mt-3 space-y-1.5 text-sm">{["Pay upfront","Submit paperwork","Wait for reimbursement","Stay stressed"].map(x=><li key={x}>{x}</li>)}</ul></div><div className="rounded-2xl border border-mentor-blue bg-mentor-blue/5 p-5"><div className="text-xs font-bold uppercase tracking-[0.14em] text-mentor-blue">After</div><ul className="mt-3 space-y-1.5 text-sm">{["Walk in","Get treated","Track digitally","Move through a smoother experience"].map(x=><li key={x}>{x}</li>)}</ul></div></div></div>
+            </div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge"><Eyebrow>Real-time visibility</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">Finally see where your healthcare money goes.</h2><div className="mt-10 grid gap-3 md:grid-cols-5">{["department-wise spending","utilization by employee group","major cost drivers","claim categories","emerging patterns and trends"].map((x,i)=>(<div key={i} className="rounded-xl border border-mentor-line bg-white p-5 text-sm font-semibold">{x}</div>))}</div></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge max-w-4xl"><Eyebrow>Cost saving impact</Eyebrow><h2 className="display-2 mt-5">Typical cost impact.</h2><p className="lead mt-5">Companies can typically improve healthcare cost efficiency through negotiated pricing, fraud control, and smarter utilization management.</p><p className="mt-4 text-sm text-mentor-muted">The opportunity is not just cost reduction. It is cost predictability, administrative control, and a stronger employee value proposition.</p></div></section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"><div className="container-edge"><Eyebrow>Best fit companies</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">Who this solution is best for.</h2><ul className="mt-8 grid gap-2 md:grid-cols-2">{bullets(["organizations with 200+ employees","companies with rising healthcare spend","employers seeking cost visibility","companies frustrated by reimbursement chaos","organizations ready for a more structured healthcare system"])}</ul></div></section>
+
+            <section className="py-20 md:py-28"><div className="container-edge"><Eyebrow>Implementation</Eyebrow><h2 className="display-2 mt-5 max-w-3xl">Fast implementation.</h2><div className="mt-10 grid gap-4 md:grid-cols-4">{["client onboarding","employee enrollment","system setup and configuration","go-live support"].map((s,i)=>(<div key={i} className="rounded-2xl border border-mentor-line p-6"><div className="eyebrow">Step {i+1}</div><p className="mt-3 text-sm font-semibold">{s}</p></div>))}</div><p className="mt-6 text-sm text-mentor-muted">Typical implementation timeline, 2 to 4 weeks, depending on scope and integration requirements.</p></div></section>
+
+            <CTABand eyebrow="Final CTA" headline="Let us evaluate your current healthcare cost structure." subline="Request a cost assessment or book a demo to see Mentor TPA in action." testId="sf-cta" />
         </>
     );
 }
