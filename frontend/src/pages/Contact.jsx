@@ -3,6 +3,9 @@ import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Mail, Globe, MapPin } from "lucide-react";
 import { Eyebrow } from "../components/shared/Eyebrow";
+import Reveal from "../components/shared/Reveal";
+import MediaImage from "../components/shared/MediaImage";
+import { IMG } from "../components/shared/images";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -38,15 +41,27 @@ export default function Contact() {
 
     return (
         <>
-            <section className="border-b border-mentor-line"><div className="container-edge py-20 md:py-28"><Eyebrow>Contact</Eyebrow><h1 className="display-1 mt-6 max-w-4xl">Start your healthcare transformation.</h1><p className="lead mt-6 max-w-2xl">Whether you are evaluating self-funded healthcare, insurer-side claims infrastructure, provider network integration, or a better digital healthcare administration model, we are ready to help.</p></div></section>
+            <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
+                <div className="pointer-events-none absolute right-[-100px] top-[-60px] h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
+                <div className="container-edge grid gap-10 py-20 md:grid-cols-[1.15fr,1fr] md:items-end md:py-28">
+                    <Reveal>
+                        <Eyebrow>Contact</Eyebrow>
+                        <h1 className="display-1 mt-6 max-w-3xl">Start your healthcare transformation.</h1>
+                        <p className="lead mt-6 max-w-2xl">Whether you are evaluating self-funded healthcare, insurer-side claims infrastructure, provider network integration, or a better digital healthcare administration model, we are ready to help.</p>
+                    </Reveal>
+                    <Reveal variant="right" delay={120}>
+                        <MediaImage src={IMG.teamCollab} alt="Reach Mentor TPA" ratio="4/3" frame overlay="soft" />
+                    </Reveal>
+                </div>
+            </section>
 
             <section className="py-20 md:py-28"><div className="container-edge grid gap-12 md:grid-cols-[1fr,1.4fr]">
                 <div>
                     <h2 className="text-xl font-extrabold tracking-tight">Contact blocks</h2>
                     <div className="mt-6 space-y-4 text-sm">
-                        <a href="mailto:info@mentortpa.com" className="flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:border-mentor-black" data-testid="ct-email"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white"><Mail className="h-4 w-4" /></div><div><div className="font-bold">Primary enquiries</div><div className="text-mentor-muted">info@mentortpa.com</div></div></a>
-                        <div className="flex items-start gap-3 rounded-xl border border-mentor-line p-4"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white"><Globe className="h-4 w-4" /></div><div><div className="font-bold">Website</div><div className="text-mentor-muted">www.thementorhealth.com</div></div></div>
-                        <div className="flex items-start gap-3 rounded-xl border border-mentor-line p-4"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white"><MapPin className="h-4 w-4" /></div><div><div className="font-bold">Office</div><div className="text-mentor-muted">Karachi, Pakistan</div></div></div>
+                        <a href="mailto:info@mentortpa.com" className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue hover:bg-mentor-blue/[0.03]" data-testid="ct-email"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><Mail className="h-4 w-4" /></div><div><div className="font-bold">Primary enquiries</div><div className="text-mentor-muted">info@mentortpa.com</div></div></a>
+                        <div className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><Globe className="h-4 w-4" /></div><div><div className="font-bold">Website</div><div className="text-mentor-muted">www.thementorhealth.com</div></div></div>
+                        <div className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><MapPin className="h-4 w-4" /></div><div><div className="font-bold">Office</div><div className="text-mentor-muted">Karachi, Pakistan</div></div></div>
                     </div>
                     <div className="mt-6 rounded-2xl bg-mentor-surface p-5 text-sm"><div className="font-bold">International presence</div><div className="mt-3 flex flex-wrap gap-2">{["UAE","Singapore","USA"].map(p=><span key={p} className="pill">{p}</span>)}</div></div>
                     <div className="mt-4 text-xs text-mentor-muted"><Link to="/request-proposal" className="link-underline text-xs">Request a proposal <ArrowRight className="h-3.5 w-3.5" /></Link><br /><Link to="/book-demo" className="mt-2 link-underline text-xs">Book a demo <ArrowRight className="h-3.5 w-3.5" /></Link></div>

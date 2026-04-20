@@ -1,18 +1,62 @@
 import { Eyebrow } from "../components/shared/Eyebrow";
 import CTABand from "../components/shared/CTABand";
+import Reveal from "../components/shared/Reveal";
+import Counter from "../components/shared/Counter";
+import MediaImage from "../components/shared/MediaImage";
+import { IMG } from "../components/shared/images";
 import { Heart, Users, Network } from "lucide-react";
 
 export default function Providers() {
     return (
         <>
-            <section className="border-b border-mentor-line"><div className="container-edge py-20 md:py-28"><Eyebrow>For Healthcare Providers</Eyebrow><h1 className="display-1 mt-6 max-w-4xl">Join a structured healthcare network.</h1><p className="lead mt-6 max-w-2xl">Partner with Mentor TPA to become part of a growing healthcare ecosystem connected to employers, insurers, and digitally enabled healthcare workflows.</p><a href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-mentor-blue" data-testid="prov-cta-join">Become a Network Partner</a></div></section>
-            <section className="py-20 md:py-28">
-                <div className="container-edge grid gap-10 md:grid-cols-3">
-                    <div className="card-hard p-7"><div className="flex h-11 w-11 items-center justify-center rounded-lg bg-mentor-black text-white"><Network className="h-5 w-5" /></div><div className="mt-5 text-xl font-extrabold tracking-tight">Why partner with Mentor TPA</div><ul className="mt-4 space-y-2 text-sm text-mentor-muted">{["access to a wider patient ecosystem","stronger administrative coordination","digital workflow integration","structured claims and access systems","participation in a growing healthcare network"].map((x,i)=><li key={i} className="flex gap-2"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>)}</ul></div>
-                    <div className="card-hard p-7"><div className="flex h-11 w-11 items-center justify-center rounded-lg bg-mentor-black text-white"><Users className="h-5 w-5" /></div><div className="mt-5 text-xl font-extrabold tracking-tight">Who can join</div><ul className="mt-4 space-y-2 text-sm text-mentor-muted">{["hospitals","clinics","diagnostics and labs","pharmacies","healthcare facilities aligned with network standards"].map((x,i)=><li key={i} className="flex gap-2"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>)}</ul></div>
-                    <div className="card-hard p-7"><div className="flex h-11 w-11 items-center justify-center rounded-lg bg-mentor-black text-white"><Heart className="h-5 w-5" /></div><div className="mt-5 text-xl font-extrabold tracking-tight">What providers gain</div><ul className="mt-4 space-y-2 text-sm text-mentor-muted">{["better visibility in the network","operational coordination","structured cashless access pathways","participation in a more digitized healthcare flow"].map((x,i)=><li key={i} className="flex gap-2"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>)}</ul></div>
+            <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
+                <div className="pointer-events-none absolute right-[-100px] top-[-40px] h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
+                <div className="container-edge grid gap-10 py-20 md:grid-cols-[1.15fr,1fr] md:items-end md:py-28">
+                    <Reveal>
+                        <Eyebrow>For Healthcare Providers</Eyebrow>
+                        <h1 className="display-1 mt-6 max-w-3xl">Join a structured healthcare network.</h1>
+                        <p className="lead mt-6 max-w-2xl">Partner with Mentor TPA to become part of a growing healthcare ecosystem connected to employers, insurers, and digitally enabled healthcare workflows.</p>
+                        <a href="/contact" className="btn-shimmer mt-8 inline-flex items-center gap-2 rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-mentor-blue" data-testid="prov-cta-join">Become a Network Partner</a>
+                    </Reveal>
+                    <Reveal variant="right" delay={120}>
+                        <MediaImage src={IMG.nursePatient} alt="Healthcare provider with patient" ratio="4/3" frame overlay="blue" />
+                    </Reveal>
                 </div>
             </section>
+            <section className="py-20 md:py-28">
+                <div className="container-edge grid gap-5 md:grid-cols-3">
+                    {[
+                        {icon: Network, t: "Why partner with Mentor TPA", items: ["access to a wider patient ecosystem","stronger administrative coordination","digital workflow integration","structured claims and access systems","participation in a growing healthcare network"]},
+                        {icon: Users, t: "Who can join", items: ["hospitals","clinics","diagnostics and labs","pharmacies","healthcare facilities aligned with network standards"]},
+                        {icon: Heart, t: "What providers gain", items: ["better visibility in the network","operational coordination","structured cashless access pathways","participation in a more digitized healthcare flow"]},
+                    ].map((col,i)=>(
+                        <Reveal key={i} delay={i*100}>
+                            <div className="card-hard tilt-card p-7 h-full"><div className="flex h-11 w-11 items-center justify-center rounded-lg bg-mentor-black text-white"><col.icon className="h-5 w-5" /></div><div className="mt-5 text-xl font-extrabold tracking-tight">{col.t}</div><ul className="mt-4 space-y-2 text-sm text-mentor-muted">{col.items.map((x,j)=><li key={j} className="flex gap-2"><span className="mt-2 h-1 w-1 rounded-full bg-mentor-blue flex-shrink-0" />{x}</li>)}</ul></div>
+                        </Reveal>
+                    ))}
+                </div>
+            </section>
+
+            <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
+                <div className="container-edge grid gap-10 md:grid-cols-2 md:items-center">
+                    <Reveal>
+                        <Eyebrow>Network scale</Eyebrow>
+                        <h2 className="display-2 mt-5">Join a network that is already scaling.</h2>
+                        <p className="lead mt-5">Mentor TPA brings structured demand, administrative clarity, and digital coordination into every provider relationship.</p>
+                    </Reveal>
+                    <div className="grid grid-cols-2 gap-3">
+                        {[["300+","hospitals"],["15,000+","doctors"],["700+","labs & diagnostics"],["—","pharmacy network"]].map(([n,t],i)=>(
+                            <Reveal key={i} delay={i*80}>
+                                <div className="rounded-2xl border border-mentor-line bg-white p-6 h-full transition hover:-translate-y-1 hover:border-mentor-blue">
+                                    <div className="stat-num text-mentor-blue"><Counter value={n} /></div>
+                                    <div className="mt-2 text-sm text-mentor-muted">{t}</div>
+                                </div>
+                            </Reveal>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <CTABand eyebrow="Providers" headline="Apply to Join Network." subline="Contact Provider Relations to begin onboarding." testId="prov-cta" />
         </>
     );

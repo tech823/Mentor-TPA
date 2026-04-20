@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only re-test of Mentor TPA marketing site after images + interactivity updates (Reveal / Counter / MediaImage / category filter / mesh-hero). All 15 routes load cleanly with zero console / React runtime errors. Navbar dropdowns, Home & ProviderNetwork animated counters, Services category filter, all 3 forms (Contact, RequestProposal, BookDemo), Footer mailto + legal links, HospitalPanel empty state, scroll-reveal animations, and mobile navigation at 390px are all working. No backend (forms are MOCKED via setTimeout as per spec).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Navbar @ 1024px", "issues": ["Desktop nav is still active at exactly 1024px (mobile toggle hidden) so labels 'Provider Network' and 'Book a Demo' wrap to 2 lines causing slight mis-alignment. Request said 'Mobile menu 1024px and below' but breakpoint is actually <1024px (lg). Minor layout issue only; not a runtime bug."]},
+      {"screen": "Terms page", "issues": ["Terms page contact line uses 'hello@mentortpa.com' while Footer and Contact page use 'info@mentortpa.com'. Inconsistent email across pages. Request requires info@mentortpa.com."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional) Align Navbar mobile-menu breakpoint so it activates at <=1024px as specified, or tighten desktop nav so 'Provider Network' / 'Book a Demo' do not wrap at 1024px.",
+    "(Optional) Make the Terms page contact email consistent with Footer: change 'hello@mentortpa.com' -> 'info@mentortpa.com' in /app/frontend/src/pages/Terms.jsx.",
+    "(Testability) Add data-testid=\"mobile-nav-panel\" to the opened mobile nav container for easier automation (currently only the toggle has a testid)."
+  ],
+  "critical_code_review_comments": [
+    "Contact form exposes the email field through two testids: ct-email (wrapper div) and ct-email-input (the actual input). Consider keeping only ct-email on the input to avoid confusion for test authors.",
+    "BookDemo form has been simplified vs iteration 1 (no date/time picker, no org-type select). If date/time selection was a product requirement, it has regressed; if simplification was intentional, iteration_1 context is stale.",
+    "RequestProposal vs BookDemo vs Contact still duplicate the Field/validation/toast pattern (~70% overlap). DRY candidate: shared LeadForm component.",
+    "Counter component uses requestAnimationFrame inside a useEffect keyed on [started, target, duration, decimals, prefix, suffix]. The derived strings prefix/suffix/numericStr are recomputed every render; acceptable here but consider useMemo if value updates frequently.",
+    "Reveal uses a per-element IntersectionObserver instance. For pages with 16+ reveals (e.g. About) this is fine but a shared observer would be cheaper; non-blocking."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100% on critical flows"},
+  "test_credentials": "N/A",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 15 routes return 200 with zero console errors. Home counters animate to 98.4%, 300+, 15,000+, 700+. ProviderNetwork counters to 300+, 15,000+, 700+. Services filter counts: all=7, claims=3, network=1, members=2, care=1. Reveal: 16/16 reveal-v elements receive .reveal-in class after scroll on /about. Forms: empty submit shows 'Please fix the highlighted fields.' sonner toast + inline error labels; valid submit shows ct-success / rp-success / bd-success (submission is MOCKED via setTimeout, no backend exists). Important testids: Contact uses ct-email-input for the input (ct-email is the wrapper), ct-fullName, ct-phone, ct-orgType (shadcn Select), ct-message, ct-submit, ct-success. RP uses rp-company, rp-contact, rp-email (wrapper around input), rp-phone, rp-industry, rp-employees, rp-model, rp-challenge, rp-notes, rp-submit, rp-success. BD uses bd-fullName, bd-company, bd-email (wrapper), bd-phone, bd-message, bd-submit, bd-success. Footer mailto = mailto:info@mentortpa.com. Mobile toggle testid = nav-mobile-toggle (active only at <1024px). Hospital Panel shows 'Panel list coming soon.' + contact CTA. Home has 3 <img> all from images.unsplash.com, 0 broken. Two small design-level issues: (1) at 1024px labels wrap in desktop nav, (2) Terms page uses hello@ instead of info@. No retest needed; main agent can self-verify.",
+  "rca of the issue": "N/A - no functional bugs found."
+}

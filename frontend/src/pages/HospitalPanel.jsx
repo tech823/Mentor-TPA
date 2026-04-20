@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
 import { Search, Info } from "lucide-react";
 import { Eyebrow } from "../components/shared/Eyebrow";
+import MediaImage from "../components/shared/MediaImage";
+import { IMG } from "../components/shared/images";
 import { Input } from "@/components/ui/input";
 import { HOSPITALS } from "../data/hospitals";
 
 export default function HospitalPanel() {
     return (
         <>
-            <section className="border-b border-mentor-line bg-white" data-testid="hp-hero">
-                <div className="container-edge py-16 md:py-20">
-                    <Eyebrow>Hospital Panel List</Eyebrow>
-                    <h1 className="display-1 mt-6 max-w-4xl">Hospital Panel List</h1>
-                    <p className="lead mt-5 max-w-2xl">Browse hospitals available within the Mentor TPA network. Use filters to search by city, hospital name, specialty, and service category.</p>
+            <section className="relative overflow-hidden border-b border-mentor-line mesh-hero" data-testid="hp-hero">
+                <div className="pointer-events-none absolute right-[-100px] top-[-40px] h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
+                <div className="container-edge grid gap-10 py-16 md:grid-cols-[1.1fr,1fr] md:items-end md:py-20">
+                    <div>
+                        <Eyebrow>Hospital Panel List</Eyebrow>
+                        <h1 className="display-1 mt-6 max-w-3xl">Hospital Panel List</h1>
+                        <p className="lead mt-5 max-w-2xl">Browse hospitals available within the Mentor TPA network. Use filters to search by city, hospital name, specialty, and service category.</p>
+                    </div>
+                    <div>
+                        <MediaImage src={IMG.hospitalExterior} alt="Hospital facilities" ratio="4/3" frame overlay="soft" />
+                    </div>
                 </div>
             </section>
 

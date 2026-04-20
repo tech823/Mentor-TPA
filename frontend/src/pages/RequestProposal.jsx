@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Clock } from "lucide-react";
 import { Eyebrow } from "../components/shared/Eyebrow";
+import MediaImage from "../components/shared/MediaImage";
+import { IMG } from "../components/shared/images";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -39,8 +41,22 @@ export default function RequestProposal() {
     );
 
     return (
-        <section className="py-20 md:py-28" data-testid="rp-page"><div className="container-edge grid gap-12 md:grid-cols-[1fr,1.4fr]">
-            <div><Eyebrow>Request a Proposal</Eyebrow><h1 className="display-2 mt-5">Request a proposal.</h1><p className="lead mt-4">Tell us about your current healthcare model and we will help you evaluate the right structure, whether you need a self-funded solution, claims administration support, or insurer-ready infrastructure.</p></div>
+        <section className="relative py-20 md:py-28 mesh-hero" data-testid="rp-page">
+            <div className="pointer-events-none absolute right-[-120px] top-10 h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
+            <div className="container-edge grid gap-12 md:grid-cols-[1fr,1.4fr]">
+            <div>
+                <Eyebrow>Request a Proposal</Eyebrow>
+                <h1 className="display-2 mt-5">Request a proposal.</h1>
+                <p className="lead mt-4">Tell us about your current healthcare model and we will help you evaluate the right structure, whether you need a self-funded solution, claims administration support, or insurer-ready infrastructure.</p>
+                <div className="mt-8">
+                    <MediaImage src={IMG.corporateMeeting} alt="Proposal review meeting" ratio="16/10" rounded="rounded-2xl" overlay="soft" />
+                </div>
+                <ul className="mt-8 space-y-3 text-sm">
+                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><FileText className="h-4 w-4" /></span><span><span className="font-bold">Tailored proposal</span> built for your healthcare model</span></li>
+                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><ShieldCheck className="h-4 w-4" /></span><span><span className="font-bold">Confidential review</span> of your current structure</span></li>
+                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><Clock className="h-4 w-4" /></span><span><span className="font-bold">48-hour response</span> from our team</span></li>
+                </ul>
+            </div>
             <form onSubmit={onSubmit} className="rounded-3xl border border-mentor-line p-6 md:p-8" data-testid="rp-form" noValidate>
                 <div className="grid gap-5 md:grid-cols-2">
                     <Field label="Company Name" required><Input data-testid="rp-company" value={form.company} onChange={handle("company")} className={errors.company?"border-red-500":""} />{errors.company && <p className="text-xs text-red-500">{errors.company}</p>}</Field>
