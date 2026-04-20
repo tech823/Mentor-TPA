@@ -16,7 +16,7 @@ export default function Privacy() {
                     <h2 className="text-xl font-extrabold pt-4">How we use it</h2>
                     <p>To respond to your request, to follow up on commercial discussions, and to improve how we communicate with potential clients and partners.</p>
                     <h2 className="text-xl font-extrabold pt-4">Contact</h2>
-                    <p>For privacy queries, contact <a className="text-mentor-blue underline" href="mailto:hello@mentortpa.com">hello@mentortpa.com</a>.</p>
+                    <p>For privacy queries, contact <a className="text-mentor-blue underline" href="mailto:info@mentortpa.com">info@mentortpa.com</a>.</p>
                 </div>
             </div>
         </section>

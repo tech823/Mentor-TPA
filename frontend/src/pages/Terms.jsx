@@ -14,7 +14,7 @@ export default function Terms() {
                     <h2 className="text-xl font-extrabold pt-4">Intellectual property</h2>
                     <p>The Mentor TPA name, logo, and platform content are the property of Mentor TPA and may not be reused without permission.</p>
                     <h2 className="text-xl font-extrabold pt-4">Contact</h2>
-                    <p>Questions about these terms can be directed to <a className="text-mentor-blue underline" href="mailto:hello@mentortpa.com">hello@mentortpa.com</a>.</p>
+                    <p>Questions about these terms can be directed to <a className="text-mentor-blue underline" href="mailto:info@mentortpa.com">info@mentortpa.com</a>.</p>
                 </div>
             </div>
         </section>
