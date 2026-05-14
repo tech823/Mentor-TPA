@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "jetro": {
+      "command": "C:\\Users\\hasan\\.jetro\\runtime\\node-win32-x64.exe",
+      "args": [
+        "C:\\Users\\hasan\\.jetro\\mcp-server\\index.js"
+      ],
+      "env": {
+        "JET_WORKSPACE": "c:\\Users\\hasan\\Desktop\\Fazi\\Active Projects\\Mentor-TPA",
+        "JET_API_URL": "https://api.jetro.ai",
+        "PATH": "C:\\Users\\hasan\\.jetro\\runtime;C:\\Program Files\\Amazon Corretto\\jdk17.0.17_10\\bin;C:\\Python312\\Scripts\\;C:\\Python312\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR;C:\\xampp\\php;C:\\ProgramData\\ComposerSetup\\bin;C:\\Users\\hasan\\AppData\\Local\\Android\\Sdk\\platform-tools;C:\\Program Files\\Amazon Corretto\\jdk17.0.17_10\\bin;C:\\Users\\hasan\\AppData\\Local\\Android\\Sdk\\platform-tools;C:\\Users\\hasan\\AppData\\Local\\Android\\Sdk\\emulator;C:\\Users\\hasan\\AppData\\Local\\Android\\Sdk\\tools;C:\\Users\\hasan\\AppData\\Local\\Android\\Sdk\\tools\\bin;C:\\Python312\\Scripts\\;C:\\Python312\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Git\\cmd;C:\\Program Files\\NVIDIA Corporation\\NVIDIA app\\NvDLISR;C:\\Users\\hasan\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\hasan\\AppData\\Roaming\\npm;C:\\Users\\hasan\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\hasan\\AppData\\Roaming\\Python\\Python312\\Scripts;C:\\Users\\hasan\\AppData\\Local\\Programs\\Kiro\\bin;C:\\Users\\hasan\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\hasan\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\hasan\\AppData\\Local\\Programs\\Antigravity\\bin"
+      }
+    }
+  }
+}

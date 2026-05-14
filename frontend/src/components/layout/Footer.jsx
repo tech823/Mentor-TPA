@@ -22,30 +22,45 @@ export default function Footer() {
             </div>
             <div className="container-edge grid gap-12 py-14 md:grid-cols-[1.5fr,3fr]">
                 <div>
-                    <div className="flex items-center gap-2">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white"><span className="font-extrabold text-mentor-black">M</span></div>
-                        <div className="text-lg font-extrabold tracking-tight">Mentor<span className="text-mentor-blue">.</span>TPA</div>
-                    </div>
-                    <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">Mentor TPA is a technology-enabled healthcare administration company helping employers, insurers, providers, and patients operate through a more structured and connected healthcare system.</p>
-                    <div className="mt-6 space-y-2.5 text-sm text-white/75">
-                        <div className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-mentor-blue" /><span>Karachi, Pakistan</span></div>
-                        <a href="mailto:info@mentortpa.com" className="flex items-center gap-2.5 transition hover:text-white" data-testid="footer-email"><Mail className="h-4 w-4 flex-shrink-0 text-mentor-blue" />info@mentortpa.com</a>
-                        <div className="flex items-center gap-2.5"><Globe className="h-4 w-4 flex-shrink-0 text-mentor-blue" />www.thementorhealth.com</div>
+                    <Link to="/" className="flex items-center gap-2">
+                        <img src="/Logo-in-white.png" alt="Mentor Third-Party Administrator (TPA)" className="h-9 w-auto" />
+                    </Link>
+                    <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">Mentor Third-Party Administrator (TPA) is a healthcare administration platform helping employers, insurers, providers, and patients operate through a more structured and connected healthcare system.</p>
+                    <div className="mt-6 space-y-4 text-sm text-white/75">
+                        <div className="flex items-start gap-2.5 py-1"><MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-mentor-blue" aria-hidden="true" /><span>Karachi, Pakistan</span></div>
+                        <a href="mailto:info@mentortpa.com" className="flex items-center gap-2.5 py-1 transition hover:text-white" data-testid="footer-email">
+                            <Mail className="h-4 w-4 flex-shrink-0 text-mentor-blue" aria-hidden="true" />info@mentortpa.com
+                        </a>
+                        <div className="flex items-center gap-2.5 py-1">
+                            <Globe className="h-4 w-4 flex-shrink-0 text-mentor-blue" aria-hidden="true" />www.thementorhealth.com
+                        </div>
                     </div>
                     <div className="mt-6 flex flex-wrap gap-2">
-                        {["SECP Licensed","Shariah Compliant","AI Enabled","Nationwide Network"].map(p => <span key={p} className="pill" style={{ background: "transparent", color: "#fff", borderColor: "rgba(255,255,255,0.2)" }}>{p}</span>)}
+                        {["SECP Licensed","Shariah Compliant","AI Enabled","Nationwide Network"].map(p => <span key={p} className="pill bg-transparent text-white border-white/20">{p}</span>)}
                     </div>
                 </div>
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                     {cols.map((col) => (
                         <div key={col.heading}>
-                            <div className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-white/50">{col.heading}</div>
-                            <ul className="space-y-2.5">{col.links.map((l) => (<li key={l.to+l.label}><Link to={l.to} data-testid={`footer-link-${l.to.replace(/\//g, "-")}`} className="text-sm text-white/80 transition hover:text-white">{l.label}</Link></li>))}</ul>
+                            <h3 className="mb-4 text-[11px] font-bold uppercase tracking-[0.16em] text-white/50">{col.heading}</h3>
+                            <ul className="space-y-1">
+                                {col.links.map((l) => (
+                                    <li key={l.to+l.label}>
+                                        <Link 
+                                            to={l.to} 
+                                            data-testid={`footer-link-${l.to.replace(/\//g, "-")}`} 
+                                            className="inline-flex items-center min-h-[44px] py-1 text-sm text-white/80 transition hover:text-white"
+                                        >
+                                            {l.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     ))}
                 </div>
             </div>
-            <div className="border-t border-white/10"><div className="container-edge flex flex-col gap-3 py-6 text-xs text-white/55 md:flex-row md:items-center md:justify-between"><div>© {new Date().getFullYear()} Mentor TPA. All rights reserved.</div><div className="flex gap-5"><Link to="/privacy" className="hover:text-white">Privacy</Link><Link to="/terms" className="hover:text-white">Terms</Link></div></div></div>
+            <div className="border-t border-white/10"><div className="container-edge flex flex-col gap-3 py-6 text-xs text-white/55 md:flex-row md:items-center md:justify-between"><div>© {new Date().getFullYear()} Mentor Third-Party Administrator (TPA). All rights reserved.</div><div className="flex gap-5"><Link to="/privacy" className="inline-flex min-h-[44px] items-center hover:text-white">Privacy</Link><Link to="/terms" className="inline-flex min-h-[44px] items-center hover:text-white">Terms</Link></div></div></div>
         </footer>
     );
 }

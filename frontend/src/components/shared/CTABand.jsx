@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function CTABand({
     eyebrow = "Next step",
-    headline = "Let's see how Mentor TPA fits your organization.",
+    headline = "Let's see how Mentor Third-Party Administrator (TPA) fits your organization.",
     subline = "Book a 30-minute working session with our team — or request a formal proposal tailored to your group.",
     testId = "cta-band",
 }) {
@@ -18,11 +18,11 @@ export default function CTABand({
                     <div className="absolute right-10 top-10 hidden h-2 w-32 bg-mentor-blue md:block" />
                     <div className="relative grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-end">
                         <div>
-                            <div className="eyebrow text-white/70" style={{ color: "#fff", opacity: 0.7 }}>
+                            <div className="eyebrow !text-white/70">
                                 {eyebrow}
                             </div>
                             <h2 className="display-2 mt-4 text-white">{headline}</h2>
-                            <p className="lead mt-4 text-white/70" style={{ color: "rgba(255,255,255,0.75)" }}>
+                            <p className="lead mt-4 text-white/75">
                                 {subline}
                             </p>
                         </div>

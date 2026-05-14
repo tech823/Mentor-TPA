@@ -11,11 +11,11 @@ export default function Technology() {
         <>
             <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
                 <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
-                <div className="container-edge grid gap-10 py-20 md:grid-cols-[1.2fr,1fr] md:items-end md:py-28">
+                <div className="container-fluid grid gap-10 py-20 md:grid-cols-[1.2fr,1fr] md:items-end md:py-28">
                     <Reveal>
                         <Eyebrow>Technology</Eyebrow>
-                        <h1 className="display-1 mt-6 max-w-3xl">Built on digital healthcare infrastructure.</h1>
-                        <p className="lead mt-6 max-w-2xl">Mentor TPA is being built as a secure, scalable, and intelligence-enabled healthcare administration platform for employers, insurers, providers, and members.</p>
+                        <h1 className="display-1 mt-6 max-w-3xl">Built on digital healthcare administration infrastructure.</h1>
+                        <p className="lead mt-6 max-w-2xl">Mentor Third-Party Administrator (TPA) is being built as a secure, scalable, and intelligence-enabled healthcare administration platform for employers, insurers, providers, and members.</p>
                     </Reveal>
                     <Reveal variant="right" delay={120}>
                         <MediaImage src={IMG.techInfra} alt="Secure cloud infrastructure" ratio="4/3" frame overlay="blue" />
@@ -49,7 +49,7 @@ export default function Technology() {
                     <Reveal>
                         <Eyebrow><span className="text-mentor-blue">Why this matters</span></Eyebrow>
                         <h2 className="display-2 mt-5 text-white">Technology is no longer optional in healthcare administration.</h2>
-                        <p className="lead mt-5" style={{color:"rgba(255,255,255,0.75)"}}>Healthcare administration today demands more than manpower. It requires data visibility, process control, fraud resistance, and scalable execution. Technology is the only sensible way to do that without drowning in operational sprawl. Healthcare admin run on spreadsheets is not strategy. It is just organized panic.</p>
+                        <p className="lead mt-5" style={{color:"rgba(255,255,255,0.75)"}}>Healthcare administration today demands more than manpower. It requires data visibility, process control, fraud resistance, and scalable execution. Technology is the only sensible way to do that without drowning in operational sprawl. Healthcare administration run on spreadsheets is not strategy. It is just organized panic.</p>
                     </Reveal>
                 </div>
             </section>

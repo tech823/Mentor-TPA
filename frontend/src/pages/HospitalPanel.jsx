@@ -15,7 +15,7 @@ export default function HospitalPanel() {
                     <div>
                         <Eyebrow>Hospital Panel List</Eyebrow>
                         <h1 className="display-1 mt-6 max-w-3xl">Hospital Panel List</h1>
-                        <p className="lead mt-5 max-w-2xl">Browse hospitals available within the Mentor TPA network. Use filters to search by city, hospital name, specialty, and service category.</p>
+                        <p className="lead mt-5 max-w-2xl">Browse hospitals available within the Mentor Third-Party Administrator (TPA) network. Use filters to search by city, hospital name, specialty, and service category.</p>
                     </div>
                     <div>
                         <MediaImage src={IMG.hospitalExterior} alt="Hospital facilities" ratio="4/3" frame overlay="soft" />

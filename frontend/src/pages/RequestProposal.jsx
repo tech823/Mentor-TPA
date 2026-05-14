@@ -1,76 +1,259 @@
 import { useState } from "react";
-import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Clock } from "lucide-react";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, FileText, ShieldCheck, Clock, Sparkles, TrendingUp, BarChart3, Loader2 } from "lucide-react";
+
 import { Eyebrow } from "../components/shared/Eyebrow";
+import Reveal from "../components/shared/Reveal";
 import MediaImage from "../components/shared/MediaImage";
 import { IMG } from "../components/shared/images";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FormField } from "../components/shared/FormFields";
 
-const MODELS = ["Insurance","Reimbursement","Self-Funded","Mixed"];
-const CHALLENGES = ["Rising cost","Claims burden","Poor visibility","Employee dissatisfaction","Provider coordination"];
-const initial = { company:"", industry:"", contact:"", email:"", phone:"", employees:"", model:"", challenge:"", notes:"" };
+const MODELS = ["Insurance", "Reimbursement", "Self-Funded", "Mixed", "Direct Primary Care"];
+const CHALLENGES = [
+    "Rising cost of care",
+    "High claims administrative burden",
+    "Lack of data visibility",
+    "Low employee satisfaction",
+    "Fragmented provider network",
+    "Compliance & Regulatory complexity"
+];
 
-function Field({label,children,required}){return(<div className="space-y-1.5"><Label className="text-xs font-bold uppercase tracking-[0.08em] text-mentor-muted">{label}{required && <span className="ml-1 text-mentor-blue">*</span>}</Label>{children}</div>);}
+const proposalSchema = z.object({
+    company: z.string().min(2, "Company name must be at least 2 characters"),
+    industry: z.string().optional(),
+    contact: z.string().min(2, "Contact person is required"),
+    email: z.string().email("Please enter a valid business email address"),
+    phone: z.string().min(8, "Please enter a valid contact number"),
+    employees: z.string().optional(),
+    model: z.string().min(1, "Please select a model"),
+    challenge: z.string().min(1, "Please select a challenge"),
+    notes: z.string().optional(),
+});
 
 export default function RequestProposal() {
-    const [form,setForm] = useState(initial);
-    const [errors,setErrors] = useState({});
-    const [submitted,setSubmitted] = useState(false);
-    const [submitting,setSubmitting] = useState(false);
-    const handle = (k) => (e) => setForm((f)=>({...f,[k]: e?.target ? e.target.value : e}));
+    const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
-    const onSubmit = (ev) => {
-        ev.preventDefault();
-        const e = {};
-        if (!form.company.trim()) e.company = "Required.";
-        if (!form.contact.trim()) e.contact = "Required.";
-        if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Invalid email.";
-        if (!form.phone.trim() || form.phone.replace(/\D/g,"").length<7) e.phone = "Invalid phone.";
-        setErrors(e);
-        if (Object.keys(e).length) { toast.error("Please fix the highlighted fields."); return; }
+    const methods = useForm({
+        resolver: zodResolver(proposalSchema),
+        defaultValues: {
+            company: "",
+            industry: "",
+            contact: "",
+            email: "",
+            phone: "",
+            employees: "",
+            model: "",
+            challenge: "",
+            notes: "",
+        },
+        mode: "onBlur"
+    });
+
+    const onSubmit = async (data) => {
         setSubmitting(true);
-        setTimeout(()=>{ setSubmitting(false); setSubmitted(true); toast.success("Proposal request received."); },700);
+        try {
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1800));
+            console.log("Proposal Request:", data);
+            setSubmitted(true);
+            toast.success("Proposal request successfully transmitted.");
+        } catch (error) {
+            toast.error("Transmission failed. Please try again.");
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     if (submitted) return (
-        <section className="py-24 md:py-32" data-testid="rp-success"><div className="container-edge max-w-2xl text-center"><div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-mentor-blue/10"><CheckCircle2 className="h-8 w-8 text-mentor-blue" /></div><h1 className="display-2 mt-8">Proposal request received.</h1><p className="lead mt-4">Our team will be in touch shortly.</p><div className="mt-8"><Link to="/" className="rounded-full bg-mentor-black px-5 py-3 text-sm font-semibold text-white">Back to home</Link></div></div></section>
+        <main className="min-h-[90vh] flex items-center justify-center py-24 px-6 bg-mentor-surface/30" role="main">
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="max-w-2xl w-full text-center p-12 rounded-[3rem] bg-white border border-mentor-line shadow-2xl relative overflow-hidden"
+            >
+                {/* Premium Background Accent */}
+                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-mentor-blue to-blue-600" />
+                
+                <motion.div 
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.2 }}
+                    className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-mentor-blue/10 mb-8"
+                >
+                    <CheckCircle2 className="h-12 w-12 text-mentor-blue" aria-hidden="true" />
+                </motion.div>
+
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    <h1 className="display-2 text-mentor-black">Request Transmitted.</h1>
+                    <p className="lead mt-6 text-mentor-muted">
+                        Our actuarial and clinical teams are reviewing your organization's profile. 
+                        Expect a preliminary assessment within <span className="text-mentor-blue font-bold">48 business hours</span>.
+                    </p>
+                </motion.div>
+
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                    <Link to="/" className="w-full sm:w-auto rounded-full bg-mentor-black px-10 py-4 text-sm font-bold text-white transition hover:bg-mentor-blue hover:shadow-lg hover:shadow-mentor-blue/20">
+                        Return to Dashboard
+                    </Link>
+                    <Link to="/services" className="w-full sm:w-auto rounded-full border border-mentor-line px-10 py-4 text-sm font-bold text-mentor-black transition hover:bg-mentor-surface">
+                        Explore Services
+                    </Link>
+                </motion.div>
+
+                {/* Progress-like indicator */}
+                <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1.5, ease: "easeInOut" }}
+                    className="absolute bottom-0 left-0 h-1 bg-mentor-blue/20"
+                />
+            </motion.div>
+        </main>
     );
 
     return (
-        <section className="relative py-20 md:py-28 mesh-hero" data-testid="rp-page">
-            <div className="pointer-events-none absolute right-[-120px] top-10 h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
-            <div className="container-edge grid gap-12 md:grid-cols-[1fr,1.4fr]">
-            <div>
-                <Eyebrow>Request a Proposal</Eyebrow>
-                <h1 className="display-2 mt-5">Request a proposal.</h1>
-                <p className="lead mt-4">Tell us about your current healthcare model and we will help you evaluate the right structure, whether you need a self-funded solution, claims administration support, or insurer-ready infrastructure.</p>
-                <div className="mt-8">
-                    <MediaImage src={IMG.corporateMeeting} alt="Proposal review meeting" ratio="16/10" rounded="rounded-2xl" overlay="soft" />
+        <section className="relative py-20 md:py-32 overflow-hidden bg-mentor-surface/10" data-testid="rp-page">
+            {/* Background elements */}
+            <div className="pointer-events-none absolute right-[-10%] top-0 h-[600px] w-[600px] rounded-full bg-mentor-blue/5 blur-[120px]" />
+            <div className="pointer-events-none absolute left-[-5%] bottom-0 h-[400px] w-[400px] rounded-full bg-mentor-blue/5 blur-[100px]" />
+            <div className="absolute inset-0 mesh-hero opacity-30" />
+
+            <div className="container-edge relative z-10 grid gap-16 lg:grid-cols-[1fr,1.3fr]">
+                <div>
+                    <Reveal>
+                        <Eyebrow icon={<Sparkles className="h-3 w-3" />}>Precision Healthcare</Eyebrow>
+                        <h1 className="display-2 mt-6 tracking-tight">Request a <span className="text-mentor-blue">tailored</span> proposal.</h1>
+                        <p className="lead mt-6 text-mentor-muted">
+                            Elevate your healthcare strategy with data-driven insights. Our team crafts personalized TPA solutions that optimize clinical outcomes while minimizing administrative waste.
+                        </p>
+                    </Reveal>
+                    
+                    <Reveal delay={200} className="mt-10 group overflow-hidden rounded-3xl border border-mentor-line shadow-xl transition-all duration-500 hover:shadow-mentor-blue/10">
+                        <MediaImage 
+                            src={IMG.corporateMeeting} 
+                            alt="Proposal review meeting" 
+                            ratio="16/9" 
+                            overlay="soft" 
+                        />
+                    </Reveal>
+
+                    <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+                        <Reveal delay={300}>
+                            <FeatureItem 
+                                icon={<FileText />} 
+                                title="Actuarial Precision" 
+                                desc="Customized modeling built specifically for your employee demographic and risk profile."
+                            />
+                        </Reveal>
+                        <Reveal delay={400}>
+                            <FeatureItem 
+                                icon={<ShieldCheck />} 
+                                title="Fiduciary Integrity" 
+                                desc="Complete transparency in claims adjudication and fund management."
+                            />
+                        </Reveal>
+                        <Reveal delay={500}>
+                            <FeatureItem 
+                                icon={<Clock />} 
+                                title="Rapid Deployment" 
+                                desc="Expedited review cycle ensuring your proposal is ready for evaluation within 2 days."
+                            />
+                        </Reveal>
+                    </div>
                 </div>
-                <ul className="mt-8 space-y-3 text-sm">
-                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><FileText className="h-4 w-4" /></span><span><span className="font-bold">Tailored proposal</span> built for your healthcare model</span></li>
-                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><ShieldCheck className="h-4 w-4" /></span><span><span className="font-bold">Confidential review</span> of your current structure</span></li>
-                    <li className="flex items-center gap-3"><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-mentor-blue/10 text-mentor-blue"><Clock className="h-4 w-4" /></span><span><span className="font-bold">48-hour response</span> from our team</span></li>
-                </ul>
+
+                <div className="relative">
+                    <Reveal variant="right">
+                        <div className="absolute -inset-1 bg-gradient-to-tr from-mentor-blue/10 via-transparent to-mentor-blue/5 blur-3xl rounded-[3rem]" />
+                        <FormProvider {...methods}>
+                            <form 
+                                onSubmit={methods.handleSubmit(onSubmit)} 
+                                className="relative rounded-[2.5rem] bg-white/80 backdrop-blur-xl border border-mentor-line p-8 md:p-12 shadow-2xl shadow-mentor-blue/5" 
+                                data-testid="rp-form" 
+                                noValidate
+                            >
+                                <div className="mb-10 flex items-center justify-between">
+                                    <h2 className="text-2xl font-bold tracking-tight text-mentor-black">Proposal Inquiry</h2>
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-mentor-blue/10">
+                                        <BarChart3 className="h-5 w-5 text-mentor-blue" />
+                                    </div>
+                                </div>
+
+                                <div className="space-y-8">
+                                    <div className="grid gap-6 md:grid-cols-2">
+                                        <FormField name="company" label="Company Name" placeholder="e.g. Global Tech Solutions" required />
+                                        <FormField name="industry" label="Industry Sector" placeholder="e.g. Healthcare, Finance" />
+                                        <FormField name="contact" label="Contact Person" placeholder="Full name" required />
+                                        <FormField name="email" type="email" label="Business Email" placeholder="name@company.com" required />
+                                        <FormField name="phone" label="Contact Phone" placeholder="+1 (555) 000-0000" required />
+                                        <FormField name="employees" label="Employee Count" placeholder="e.g. 500-1000" />
+                                        <FormField name="model" type="select" label="Current Model" options={MODELS} required />
+                                        <FormField name="challenge" type="select" label="Primary Objective" options={CHALLENGES} required />
+                                    </div>
+                                    
+                                    <FormField name="notes" type="textarea" label="Additional Context" placeholder="Tell us more about your specific needs or pain points..." />
+                                    
+                                    <button 
+                                        type="submit" 
+                                        data-testid="rp-submit" 
+                                        disabled={submitting} 
+                                        className="group relative w-full overflow-hidden rounded-full bg-mentor-black py-5 text-sm font-bold text-white transition-all hover:bg-mentor-blue hover:shadow-xl hover:shadow-mentor-blue/20 disabled:opacity-50"
+                                    >
+                                        <span className="relative z-10 flex items-center justify-center gap-2">
+                                            {submitting ? (
+                                                <>
+                                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                                    Processing Inquiry...
+                                                </>
+                                            ) : (
+                                                "Submit Proposal Request"
+                                            )}
+                                            {!submitting && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
+                                        </span>
+                                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-mentor-blue to-blue-600 opacity-0 transition-opacity group-hover:opacity-100" />
+                                    </button>
+                                </div>
+
+                                <div className="mt-10 pt-8 border-t border-mentor-line flex items-center gap-4 text-[10px] font-bold text-mentor-muted uppercase tracking-widest opacity-70">
+                                    <TrendingUp className="h-4 w-4 text-mentor-blue" />
+                                    Optimized for performance & outcomes
+                                </div>
+                            </form>
+                        </FormProvider>
+                    </Reveal>
+                </div>
             </div>
-            <form onSubmit={onSubmit} className="rounded-3xl border border-mentor-line p-6 md:p-8" data-testid="rp-form" noValidate>
-                <div className="grid gap-5 md:grid-cols-2">
-                    <Field label="Company Name" required><Input data-testid="rp-company" value={form.company} onChange={handle("company")} className={errors.company?"border-red-500":""} />{errors.company && <p className="text-xs text-red-500">{errors.company}</p>}</Field>
-                    <Field label="Industry"><Input data-testid="rp-industry" value={form.industry} onChange={handle("industry")} /></Field>
-                    <Field label="Contact Person" required><Input data-testid="rp-contact" value={form.contact} onChange={handle("contact")} className={errors.contact?"border-red-500":""} />{errors.contact && <p className="text-xs text-red-500">{errors.contact}</p>}</Field>
-                    <Field label="Email" required><Input data-testid="rp-email" type="email" value={form.email} onChange={handle("email")} className={errors.email?"border-red-500":""} />{errors.email && <p className="text-xs text-red-500">{errors.email}</p>}</Field>
-                    <Field label="Phone" required><Input data-testid="rp-phone" value={form.phone} onChange={handle("phone")} className={errors.phone?"border-red-500":""} />{errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}</Field>
-                    <Field label="Number of employees"><Input data-testid="rp-employees" value={form.employees} onChange={handle("employees")} /></Field>
-                    <Field label="Current healthcare model"><Select value={form.model} onValueChange={handle("model")}><SelectTrigger data-testid="rp-model"><SelectValue placeholder="Select" /></SelectTrigger><SelectContent>{MODELS.map(m=><SelectItem key={m} value={m}>{m}</SelectItem>)}</SelectContent></Select></Field>
-                    <Field label="Main challenge"><Select value={form.challenge} onValueChange={handle("challenge")}><SelectTrigger data-testid="rp-challenge"><SelectValue placeholder="Select" /></SelectTrigger><SelectContent>{CHALLENGES.map(c=><SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent></Select></Field>
-                </div>
-                <div className="mt-5"><Field label="Notes"><Textarea data-testid="rp-notes" value={form.notes} onChange={handle("notes")} rows={4} /></Field></div>
-                <button type="submit" data-testid="rp-submit" disabled={submitting} className="mt-6 inline-flex items-center gap-2 rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-mentor-blue disabled:opacity-50">{submitting?"Submitting…":"Request Proposal"} <ArrowRight className="h-4 w-4" /></button>
-            </form>
-        </div></section>
+        </section>
     );
 }
+
+function FeatureItem({ icon, title, desc }) {
+    return (
+        <div className="group flex gap-4 p-4 rounded-2xl border border-transparent transition-all hover:border-mentor-line hover:bg-white hover:shadow-sm">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mentor-blue/10 text-mentor-blue shadow-inner transition-transform group-hover:scale-110">
+                {React.cloneElement(icon, { className: "h-5 w-5" })}
+            </div>
+            <div>
+                <h3 className="text-sm font-bold text-mentor-black">{title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-mentor-muted">{desc}</p>
+            </div>
+        </div>
+    );
+}
+

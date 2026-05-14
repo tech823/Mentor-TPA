@@ -1,28 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --mentor-blue: #0048ff;
-    --mentor-blue-hover: #003ad6;
-    --mentor-black: #11111f;
-    --mentor-ink: #1a1a2e;
-    --mentor-muted: #6b6b7b;
-    --mentor-line: #e7e7ec;
-    --mentor-surface: #f5f5f7;
-    --mentor-offwhite: #fff6ec;
+    /* Brand HSL Foundation */
+    --mentor-blue-h: 223;
+    --mentor-blue-s: 100%;
+    --mentor-blue-l: 50%;
+    --mentor-blue: hsl(var(--mentor-blue-h), var(--mentor-blue-s), var(--mentor-blue-l));
+    --mentor-blue-hover: hsl(var(--mentor-blue-h), var(--mentor-blue-s), 42%);
+    --mentor-blue-light: hsl(var(--mentor-blue-h), var(--mentor-blue-s), 96%);
+    --mentor-blue-alpha: hsla(var(--mentor-blue-h), var(--mentor-blue-s), var(--mentor-blue-l), 0.1);
+    
+    --mentor-black-h: 240;
+    --mentor-black-s: 29%;
+    --mentor-black-l: 10%;
+    --mentor-black: hsl(var(--mentor-black-h), var(--mentor-black-s), var(--mentor-black-l));
+    
+    /* Semantic Neutrals */
+    --mentor-ink: hsl(240, 29%, 15%);
+    --mentor-muted: hsl(240, 7%, 45%);
+    --mentor-line: hsl(240, 10%, 92%);
+    --mentor-surface: hsl(240, 5%, 96%);
+    --mentor-offwhite: hsl(33, 100%, 96%); /* #fff6ec to HSL */
+
+    /* Glass tokens - Ultra High Fidelity */
+    --glass-bg: hsla(0, 0%, 100%, 0.7);
+    --glass-border: hsla(0, 0%, 100%, 0.3);
+    --glass-shadow: 0 20px 40px -15px hsla(223, 100%, 50%, 0.12);
+    
+    /* Typography Stack */
+    --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', 'Manrope', system-ui, sans-serif;
 }
 
 body {
     margin: 0;
-    font-family:
-        "Manrope",
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+    font-family: var(--font-body);
     font-weight: 400;
     color: var(--mentor-black);
     background: #ffffff;
@@ -43,12 +59,12 @@ body {
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 240 29% 9%;
+        --foreground: var(--mentor-black-h) var(--mentor-black-s) var(--mentor-black-l);
         --card: 0 0% 100%;
-        --card-foreground: 240 29% 9%;
+        --card-foreground: var(--mentor-black-h) var(--mentor-black-s) var(--mentor-black-l);
         --popover: 0 0% 100%;
-        --popover-foreground: 240 29% 9%;
-        --primary: 225 100% 50%;
+        --popover-foreground: var(--mentor-black-h) var(--mentor-black-s) var(--mentor-black-l);
+        --primary: var(--mentor-blue-h) var(--mentor-blue-s) var(--mentor-blue-l);
         --primary-foreground: 0 0% 100%;
         --secondary: 240 5% 96%;
         --secondary-foreground: 240 29% 9%;
@@ -60,8 +76,8 @@ body {
         --destructive-foreground: 0 0% 100%;
         --border: 240 5% 91%;
         --input: 240 5% 91%;
-        --ring: 225 100% 50%;
-        --radius: 0.5rem;
+        --ring: var(--mentor-blue-h) var(--mentor-blue-s) var(--mentor-blue-l);
+        --radius: 1rem; /* Slightly softer radius for premium feel */
     }
 }
 
@@ -72,12 +88,10 @@ body {
     body {
         @apply bg-background text-foreground;
     }
-    h1,
-    h2,
-    h3,
-    h4 {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-display);
         font-weight: 700;
-        letter-spacing: -0.035em;
+        letter-spacing: -0.025em;
         color: var(--mentor-black);
     }
     h1 {
@@ -124,8 +138,16 @@ body {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
 }
+.container-fluid {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
 @media (min-width: 768px) {
-    .container-edge {
+    .container-edge,
+    .container-fluid {
         padding-left: 2rem;
         padding-right: 2rem;
     }
@@ -134,6 +156,16 @@ body {
     .container-edge {
         padding-left: 3rem;
         padding-right: 3rem;
+    }
+    .container-fluid {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+@media (min-width: 1536px) {
+    .container-fluid {
+        padding-left: 5rem;
+        padding-right: 5rem;
     }
 }
 
@@ -289,6 +321,28 @@ body {
     outline: 2px solid var(--mentor-blue);
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+/* Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--mentor-blue);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    z-index: 9999;
+    font-weight: 600;
+    border-radius: 0 0 12px 12px;
+    transition: top 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    text-decoration: none;
+    box-shadow: 0 10px 25px -5px rgba(0, 72, 255, 0.3);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: none;
 }
 
 /* Hide scrollbar for horizontal sections */
@@ -524,3 +578,128 @@ body {
     border-left: none;
     border-top: none;
 }
+
+/* Glassmorphism Surface */
+.glass-surface {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.glass-dark {
+    background: rgba(17, 17, 31, 0.7);
+    backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ---------------- PREMIUM DEVICE FRAMES & BLOBS ---------------- */
+
+/* Animated background blobs */
+.blob-container {
+    @apply absolute inset-0 -z-10 overflow-hidden pointer-events-none;
+}
+
+.blob {
+    @apply absolute rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-blob;
+    background: linear-gradient(135deg, var(--mentor-blue) 0%, #00d2ff 100%);
+}
+
+@keyframes blob-animation {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+.animate-blob {
+    animation: blob-animation 7s infinite alternate;
+}
+
+/* MacBook Frame - Premium Pro Model */
+.macbook-frame {
+    @apply relative mx-auto rounded-[1.8rem] bg-[#0A0A0B] p-[10px] shadow-2xl overflow-visible;
+    aspect-ratio: 16/10;
+    box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 30px 60px -12px rgba(0, 0, 0, 0.5),
+        0 18px 36px -18px rgba(0, 0, 0, 0.5);
+    border: 1px solid #2A2A2E;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.macbook-frame:hover {
+    transform: perspective(1000px) rotateX(2deg) translateY(-5px);
+}
+
+.macbook-screen {
+    @apply bg-[#000] h-full w-full rounded-[1.2rem] overflow-hidden relative border-[1px] border-black/40;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Screen reflection overlay */
+.macbook-screen::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none z-30 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(110deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+}
+
+.macbook-frame:hover .macbook-screen::after {
+    @apply opacity-100;
+}
+
+.macbook-base {
+    @apply h-4 w-[114%] bg-[#1A1A1E] absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-b-2xl shadow-2xl;
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* iPhone Frame - Premium Pro Model */
+.iphone-frame {
+    @apply relative mx-auto bg-[#0A0A0B] rounded-[3.5rem] p-[8px] border-[1px] border-[#2A2A2E] shadow-2xl;
+    aspect-ratio: 9/19.5;
+    box-shadow: 
+        0 0 0 4px #1A1A1E,
+        0 0 0 5px #2A2A2E,
+        0 50px 100px -20px rgba(0, 0, 0, 0.6);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.iphone-frame:hover {
+    transform: perspective(1000px) rotateY(-5deg) translateY(-5px);
+}
+
+.iphone-screen {
+    @apply bg-black h-full w-full rounded-[3.1rem] overflow-hidden relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Subtle screen glass reflection */
+.iphone-screen::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none opacity-[0.03] bg-gradient-to-tr from-white/20 via-transparent to-white/40 z-30;
+    transition: opacity 0.5s ease;
+}
+
+.iphone-frame:hover .iphone-screen::after {
+    @apply opacity-[0.08];
+}
+
+.iphone-dynamic-island {
+    @apply absolute top-4 left-1/2 -translate-x-1/2 w-[110px] h-[32px] bg-black rounded-full flex items-center justify-center z-40 shadow-inner;
+}
+
+.iphone-island-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-blue-500/20 absolute right-4;
+}
+

@@ -17,11 +17,11 @@ export default function SolutionsOverview() {
         <>
             <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
                 <div className="pointer-events-none absolute right-[-120px] top-[-60px] h-96 w-96 rounded-full bg-mentor-blue/10 blur-3xl" />
-                <div className="container-edge py-20 md:py-28">
+                <div className="container-fluid py-20 md:py-28">
                     <Reveal>
                         <Eyebrow>Solutions</Eyebrow>
                         <h1 className="display-1 mt-6 max-w-4xl">Healthcare solutions built for control, scale, and experience.</h1>
-                        <p className="lead mt-6 max-w-2xl">Mentor TPA supports different healthcare stakeholders through tailored infrastructure and administration models, whether you are managing employee healthcare, insurance claims operations, or healthcare delivery access.</p>
+                        <p className="lead mt-6 max-w-2xl">Mentor Third-Party Administrator (TPA) supports different healthcare stakeholders through tailored infrastructure and administrative models, whether you are managing employee healthcare, insurance claims operations, or healthcare delivery access.</p>
                     </Reveal>
                 </div>
             </section>

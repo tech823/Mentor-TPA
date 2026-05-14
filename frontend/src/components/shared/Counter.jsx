@@ -65,8 +65,9 @@ export default function Counter({ value, duration = 1400, className = "" }) {
     }, [started, target, duration, decimals, prefix, suffix]);
 
     return (
-        <span ref={ref} className={className} data-testid="counter">
-            {display}
+        <span ref={ref} className={className} data-testid="counter" aria-label={value}>
+            <span aria-hidden="true">{display}</span>
+            <span className="sr-only">{value}</span>
         </span>
     );
 }

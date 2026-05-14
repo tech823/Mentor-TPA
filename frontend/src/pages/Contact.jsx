@@ -1,91 +1,376 @@
-import { useState } from "react";
-import { toast } from "sonner";
+import React, { useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  Mail, 
+  Globe, 
+  MapPin, 
+  Send,
+  Building2,
+  Users,
+  MessageSquare,
+  Sparkles,
+  Loader2
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Mail, Globe, MapPin } from "lucide-react";
+import { toast } from "sonner";
+
 import { Eyebrow } from "../components/shared/Eyebrow";
 import Reveal from "../components/shared/Reveal";
 import MediaImage from "../components/shared/MediaImage";
 import { IMG } from "../components/shared/images";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FormField } from "../components/shared/FormFields";
 
-const ORG = ["Corporate","Insurance Company","Healthcare Provider","Other"];
-const SERVICE = ["Self-Funded Healthcare","Claims Management","TPA Infrastructure","Provider Network","Demo Request"];
-const initial = { fullName:"", company:"", jobTitle:"", email:"", phone:"", orgType:"", employees:"", service:"", message:"" };
+const contactSchema = z.object({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  company: z.string().min(2, "Company name is required"),
+  jobTitle: z.string().optional(),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(7, "Invalid phone number"),
+  orgType: z.string().min(1, "Please select organization type"),
+  employees: z.string().optional(),
+  service: z.string().optional(),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
 
-function Field({label,children,required}){return(<div className="space-y-1.5"><Label className="text-xs font-bold uppercase tracking-[0.08em] text-mentor-muted">{label}{required && <span className="ml-1 text-mentor-blue">*</span>}</Label>{children}</div>);}
+const ORG_TYPES = [
+  "Corporate",
+  "Insurance Company",
+  "Healthcare Provider",
+  "TPA Partner",
+  "Other"
+];
+
+const SERVICES = [
+  "Self-Funded Healthcare",
+  "Claims Management",
+  "TPA Infrastructure",
+  "Provider Network",
+  "Demo Request",
+  "General Inquiry"
+];
 
 export default function Contact() {
-    const [form,setForm] = useState(initial);
-    const [errors,setErrors] = useState({});
-    const [submitted,setSubmitted] = useState(false);
-    const [submitting,setSubmitting] = useState(false);
-    const handle = (k) => (e) => setForm((f)=>({...f,[k]: e?.target ? e.target.value : e}));
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const onSubmit = (ev) => {
-        ev.preventDefault();
-        const e = {};
-        if (!form.fullName.trim()) e.fullName = "Required.";
-        if (!form.company.trim()) e.company = "Required.";
-        if (!/^\S+@\S+\.\S+$/.test(form.email)) e.email = "Invalid email.";
-        if (!form.phone.trim() || form.phone.replace(/\D/g,"").length<7) e.phone = "Invalid phone.";
-        if (!form.orgType) e.orgType = "Required.";
-        if (!form.message.trim()) e.message = "Required.";
-        setErrors(e);
-        if (Object.keys(e).length) { toast.error("Please fix the highlighted fields."); return; }
-        setSubmitting(true);
-        setTimeout(()=>{ setSubmitting(false); setSubmitted(true); toast.success("Enquiry submitted."); },600);
-    };
+  const methods = useForm({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      fullName: "",
+      company: "",
+      jobTitle: "",
+      email: "",
+      phone: "",
+      orgType: "",
+      employees: "",
+      service: "",
+      message: "",
+    },
+  });
 
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    // Simulate API call
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      console.log("Contact Form Submitted:", data);
+      setSubmitted(true);
+      toast.success("Enquiry submitted successfully!");
+    } catch (error) {
+      toast.error("Failed to submit enquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (submitted) {
     return (
-        <>
-            <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
-                <div className="pointer-events-none absolute right-[-100px] top-[-60px] h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
-                <div className="container-edge grid gap-10 py-20 md:grid-cols-[1.15fr,1fr] md:items-end md:py-28">
-                    <Reveal>
-                        <Eyebrow>Contact</Eyebrow>
-                        <h1 className="display-1 mt-6 max-w-3xl">Start your healthcare transformation.</h1>
-                        <p className="lead mt-6 max-w-2xl">Whether you are evaluating self-funded healthcare, insurer-side claims infrastructure, provider network integration, or a better digital healthcare administration model, we are ready to help.</p>
-                    </Reveal>
-                    <Reveal variant="right" delay={120}>
-                        <MediaImage src={IMG.teamCollab} alt="Reach Mentor TPA" ratio="4/3" frame overlay="soft" />
-                    </Reveal>
-                </div>
-            </section>
+      <main className="min-h-[90vh] flex items-center justify-center bg-mentor-surface/30 px-6" role="main">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="container-edge max-w-2xl w-full"
+        >
+          <div className="relative overflow-hidden rounded-[3rem] border border-mentor-line bg-white p-12 text-center shadow-2xl">
+            {/* Premium Background Accent */}
+            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-mentor-blue to-blue-600" />
+            <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-mentor-blue/5 blur-3xl" />
+            <div className="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-mentor-blue/5 blur-3xl" />
+            
+            <motion.div 
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", damping: 12, stiffness: 200, delay: 0.2 }}
+              className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-mentor-blue/10 mb-8"
+            >
+              <CheckCircle2 className="h-12 w-12 text-mentor-blue" aria-hidden="true" />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <h1 className="display-2 text-mentor-black">Message Sent.</h1>
+              <p className="lead mt-6 text-mentor-muted">
+                Thank you for reaching out to Mentor Third-Party Administrator (TPA). Our team has received your inquiry and will respond within <span className="text-mentor-blue font-bold">24 hours</span>.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              <Link 
+                to="/" 
+                className="w-full sm:w-auto rounded-full bg-mentor-black px-10 py-4 text-sm font-bold text-white transition hover:bg-mentor-blue hover:shadow-lg hover:shadow-mentor-blue/20"
+              >
+                Return Home
+              </Link>
+              <button 
+                onClick={() => setSubmitted(false)}
+                className="w-full sm:w-auto rounded-full border border-mentor-line px-10 py-4 text-sm font-bold text-mentor-black transition hover:bg-mentor-surface"
+              >
+                Send Another Message
+              </button>
+            </motion.div>
 
-            <section className="py-20 md:py-28"><div className="container-edge grid gap-12 md:grid-cols-[1fr,1.4fr]">
-                <div>
-                    <h2 className="text-xl font-extrabold tracking-tight">Contact blocks</h2>
-                    <div className="mt-6 space-y-4 text-sm">
-                        <a href="mailto:info@mentortpa.com" className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue hover:bg-mentor-blue/[0.03]" data-testid="ct-email"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><Mail className="h-4 w-4" /></div><div><div className="font-bold">Primary enquiries</div><div className="text-mentor-muted">info@mentortpa.com</div></div></a>
-                        <div className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><Globe className="h-4 w-4" /></div><div><div className="font-bold">Website</div><div className="text-mentor-muted">www.thementorhealth.com</div></div></div>
-                        <div className="group flex items-start gap-3 rounded-xl border border-mentor-line p-4 transition hover:-translate-y-0.5 hover:border-mentor-blue"><div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue"><MapPin className="h-4 w-4" /></div><div><div className="font-bold">Office</div><div className="text-mentor-muted">Karachi, Pakistan</div></div></div>
-                    </div>
-                    <div className="mt-6 rounded-2xl bg-mentor-surface p-5 text-sm"><div className="font-bold">International presence</div><div className="mt-3 flex flex-wrap gap-2">{["UAE","Singapore","USA"].map(p=><span key={p} className="pill">{p}</span>)}</div></div>
-                    <div className="mt-4 text-xs text-mentor-muted"><Link to="/request-proposal" className="link-underline text-xs">Request a proposal <ArrowRight className="h-3.5 w-3.5" /></Link><br /><Link to="/book-demo" className="mt-2 link-underline text-xs">Book a demo <ArrowRight className="h-3.5 w-3.5" /></Link></div>
-                </div>
-
-                {submitted ? (
-                    <div data-testid="ct-success" className="flex flex-col items-center justify-center rounded-3xl border border-mentor-line p-12 text-center"><div className="flex h-16 w-16 items-center justify-center rounded-full bg-mentor-blue/10"><CheckCircle2 className="h-8 w-8 text-mentor-blue" /></div><h2 className="display-2 mt-6">Enquiry submitted.</h2><p className="lead mt-3 max-w-md">Our team will reach out to you shortly.</p></div>
-                ) : (
-                    <form onSubmit={onSubmit} className="rounded-3xl border border-mentor-line p-6 md:p-8" data-testid="ct-form" noValidate>
-                        <div className="grid gap-5 md:grid-cols-2">
-                            <Field label="Full Name" required><Input data-testid="ct-fullName" value={form.fullName} onChange={handle("fullName")} className={errors.fullName?"border-red-500":""} />{errors.fullName && <p className="text-xs text-red-500">{errors.fullName}</p>}</Field>
-                            <Field label="Company Name" required><Input data-testid="ct-company" value={form.company} onChange={handle("company")} className={errors.company?"border-red-500":""} />{errors.company && <p className="text-xs text-red-500">{errors.company}</p>}</Field>
-                            <Field label="Job Title"><Input data-testid="ct-jobTitle" value={form.jobTitle} onChange={handle("jobTitle")} /></Field>
-                            <Field label="Email" required><Input data-testid="ct-email-input" type="email" value={form.email} onChange={handle("email")} className={errors.email?"border-red-500":""} />{errors.email && <p className="text-xs text-red-500">{errors.email}</p>}</Field>
-                            <Field label="Phone Number" required><Input data-testid="ct-phone" value={form.phone} onChange={handle("phone")} className={errors.phone?"border-red-500":""} />{errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}</Field>
-                            <Field label="Organization Type" required><Select value={form.orgType} onValueChange={handle("orgType")}><SelectTrigger data-testid="ct-orgType" className={errors.orgType?"border-red-500":""}><SelectValue placeholder="Select" /></SelectTrigger><SelectContent>{ORG.map(o=><SelectItem key={o} value={o}>{o}</SelectItem>)}</SelectContent></Select>{errors.orgType && <p className="text-xs text-red-500">{errors.orgType}</p>}</Field>
-                            <Field label="Number of Employees or Members"><Input data-testid="ct-employees" value={form.employees} onChange={handle("employees")} /></Field>
-                            <Field label="Service Interested In"><Select value={form.service} onValueChange={handle("service")}><SelectTrigger data-testid="ct-service"><SelectValue placeholder="Select" /></SelectTrigger><SelectContent>{SERVICE.map(s=><SelectItem key={s} value={s}>{s}</SelectItem>)}</SelectContent></Select></Field>
-                        </div>
-                        <div className="mt-5"><Field label="Message" required><Textarea data-testid="ct-message" value={form.message} onChange={handle("message")} rows={5} className={errors.message?"border-red-500":""} />{errors.message && <p className="text-xs text-red-500">{errors.message}</p>}</Field></div>
-                        <button type="submit" data-testid="ct-submit" disabled={submitting} className="mt-6 inline-flex items-center gap-2 rounded-full bg-mentor-black px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-mentor-blue disabled:opacity-50">{submitting?"Sending…":"Submit Enquiry"} <ArrowRight className="h-4 w-4" /></button>
-                    </form>
-                )}
-            </div></section>
-        </>
+            {/* Progress-like indicator */}
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="absolute bottom-0 left-0 h-1 bg-mentor-blue/20"
+            />
+          </div>
+        </motion.div>
+      </main>
     );
+  }
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-mentor-line bg-mentor-surface/30 pt-32 pb-20 md:pt-40 md:pb-28">
+        <div className="absolute inset-0 mesh-hero opacity-40" />
+        <div className="container-fluid relative z-10 grid gap-12 lg:grid-cols-[1.1fr,1fr] items-center">
+          <Reveal>
+            <Eyebrow>Contact Us</Eyebrow>
+            <h1 className="display-1 mt-6 font-bold tracking-tight">
+              Let's build a <span className="text-mentor-blue">connected</span> healthcare ecosystem.
+            </h1>
+            <p className="lead mt-6 max-w-xl text-mentor-muted">
+              Whether you're looking to modernize your claims infrastructure, integrate a provider network, or evaluate self-funded solutions, our specialists are ready to guide you.
+            </p>
+            
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-mentor-line/50 shadow-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-mentor-blue/10 text-mentor-blue">
+                  <Mail className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-mentor-muted">Email Us</p>
+                  <p className="font-bold text-mentor-black">info@mentortpa.com</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-mentor-line/50 shadow-sm">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-mentor-blue/10 text-mentor-blue">
+                  <Globe className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-mentor-muted">Website</p>
+                  <p className="font-bold text-mentor-black">mentortpa.com</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+          
+          <Reveal variant="right" delay={200}>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-mentor-blue/5 blur-2xl rounded-[3rem]" />
+              <MediaImage 
+                src={IMG.teamCollab} 
+                alt="Mentor Third-Party Administrator (TPA) Team" 
+                ratio="4/3" 
+                className="rounded-[2.5rem] shadow-2xl relative"
+                frame
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Form Section */}
+      <section className="py-20 md:py-32">
+        <div className="container-edge">
+          <div className="grid gap-16 lg:grid-cols-[1fr,1.5fr]">
+            {/* Sidebar info */}
+            <div>
+              <div className="sticky top-32 space-y-12">
+                <div>
+                  <h2 className="text-2xl font-bold tracking-tight text-mentor-black">Our Global Offices</h2>
+                  <div className="mt-8 space-y-6">
+                    <div className="group flex items-start gap-5">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mentor-surface border border-mentor-line transition-colors group-hover:border-mentor-blue/30 group-hover:bg-mentor-blue/5">
+                        <MapPin className="h-6 w-6 text-mentor-blue" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-mentor-black">Headquarters</h3>
+                        <p className="text-mentor-muted mt-1 leading-relaxed">
+                          Suite 402, Business Center<br />
+                          Shahrah-e-Faisal, Karachi<br />
+                          Pakistan
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="group flex items-start gap-5">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mentor-surface border border-mentor-line transition-colors group-hover:border-mentor-blue/30 group-hover:bg-mentor-blue/5">
+                        <Building2 className="h-6 w-6 text-mentor-blue" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-mentor-black">Regional Presence</h3>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {["UAE", "Singapore", "USA", "UK"].map(p => (
+                            <span key={p} className="pill px-3 py-1 bg-mentor-surface text-[10px] font-bold">{p}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-[2rem] bg-mentor-black p-8 text-white relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-20">
+                    <Sparkles className="h-12 w-12" />
+                  </div>
+                  <h3 className="text-xl font-bold">Need immediate help?</h3>
+                  <p className="mt-3 text-white/70 text-sm leading-relaxed">
+                    Our support team is available for urgent technical inquiries regarding our provider portal and member apps.
+                  </p>
+                  <Link 
+                    to="/technology" 
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-mentor-blue hover:underline"
+                  >
+                    View Tech Support <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-mentor-blue/10 via-transparent to-mentor-blue/5 blur-3xl rounded-[3rem]" />
+              <div className="relative rounded-[2.5rem] border border-mentor-line bg-white/70 backdrop-blur-md p-8 md:p-12 shadow-sm">
+                <div className="mb-10 flex items-center justify-between">
+                  <h2 className="text-2xl font-bold tracking-tight text-mentor-black">Send a Message</h2>
+                  <div className="hidden sm:flex h-10 w-10 items-center justify-center rounded-full bg-mentor-surface">
+                    <MessageSquare className="h-5 w-5 text-mentor-blue" />
+                  </div>
+                </div>
+
+                <FormProvider {...methods}>
+                  <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <FormField 
+                        name="fullName"
+                        label="Full Name"
+                        placeholder="John Doe"
+                        required
+                      />
+                      <FormField 
+                        name="company"
+                        label="Company Name"
+                        placeholder="Organization Inc."
+                        required
+                      />
+                      <FormField 
+                        name="email"
+                        label="Work Email"
+                        type="email"
+                        placeholder="john@company.com"
+                        required
+                      />
+                      <FormField 
+                        name="phone"
+                        label="Phone Number"
+                        placeholder="+1 (555) 000-0000"
+                        required
+                      />
+                      <FormField 
+                        name="orgType"
+                        label="Organization Type"
+                        type="select"
+                        options={ORG_TYPES}
+                        required
+                      />
+                      <FormField 
+                        name="service"
+                        label="Interested In"
+                        type="select"
+                        options={SERVICES}
+                      />
+                    </div>
+                    
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <FormField 
+                        name="jobTitle"
+                        label="Job Title"
+                        placeholder="e.g. HR Director"
+                      />
+                      <FormField 
+                        name="employees"
+                        label="Number of Members"
+                        placeholder="e.g. 500-1000"
+                      />
+                    </div>
+
+                    <FormField 
+                      name="message"
+                      label="Your Message"
+                      type="textarea"
+                      placeholder="How can we help your organization?"
+                      required
+                    />
+
+                    <div className="pt-4">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-mentor-black px-10 py-5 text-sm font-bold text-white transition-all hover:bg-mentor-blue hover:shadow-xl hover:shadow-mentor-blue/20 disabled:opacity-50"
+                      >
+                        <span className="relative z-10 flex items-center gap-2">
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                              Sending...
+                            </>
+                          ) : (
+                            "Submit Inquiry"
+                          )}
+                          {!isSubmitting && <Send className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />}
+                        </span>
+                        <div className="absolute inset-0 z-0 bg-gradient-to-r from-mentor-blue to-blue-600 opacity-0 transition-opacity group-hover:opacity-100" />
+                      </button>
+                      <p className="mt-4 text-[10px] text-mentor-muted">
+                        By submitting this form, you agree to our <Link to="/privacy" className="underline">Privacy Policy</Link>.
+                      </p>
+                    </div>
+                  </form>
+                </FormProvider>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
