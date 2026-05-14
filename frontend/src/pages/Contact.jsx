@@ -159,7 +159,7 @@ export default function Contact() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-mentor-line bg-mentor-surface/30 pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="relative overflow-hidden border-b border-mentor-line bg-mentor-surface/30 pt-20 pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
         <div className="absolute inset-0 mesh-hero opacity-40" />
         <div className="container-fluid relative z-10 grid gap-12 lg:grid-cols-[1.1fr,1fr] items-center">
           <Reveal>
@@ -211,10 +211,10 @@ export default function Contact() {
       {/* Form Section */}
       <section className="py-20 md:py-32">
         <div className="container-edge">
-          <div className="grid gap-16 lg:grid-cols-[1fr,1.5fr]">
+        <div className="grid gap-16 lg:grid-cols-[1fr,1.5fr]">
             {/* Sidebar info */}
             <div>
-              <div className="sticky top-32 space-y-12">
+              <div className="lg:sticky lg:top-[calc(var(--navbar-h)+1.5rem)] space-y-12">
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight text-mentor-black">Our Global Offices</h2>
                   <div className="mt-8 space-y-6">
@@ -368,8 +368,8 @@ export default function Contact() {
                 </FormProvider>
               </div>
             </div>
-          </div>
         </div>
+      </div>
       </section>
     </>
   );

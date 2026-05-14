@@ -13,14 +13,14 @@ const HeroAnimationLoop = memo(() => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime((t) => (t + 100) % 8000);
-    }, 100);
+      setTime((t) => (t + 1000) % 8000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div
-      className="relative w-full h-[400px] md:h-[600px] flex items-center justify-center"
+      className="relative w-full h-[300px] sm:h-[400px] md:h-[520px] flex items-center justify-center"
       aria-hidden="true"
     >
       {/* Background Glow */}
@@ -104,7 +104,7 @@ const HeroAnimationLoop = memo(() => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5, duration: 1, ease: [0.2, 0.8, 0.2, 1] }}
-        className="absolute -right-4 md:right-0 bottom-4 md:bottom-20 z-20 w-[140px] md:w-[180px]"
+        className="absolute hidden sm:block -right-2 md:right-0 bottom-4 md:bottom-16 z-20 w-[110px] sm:w-[140px] md:w-[180px]"
       >
         <IphoneFrame className="shadow-2xl">
           <div className="w-full h-full bg-white p-3 flex flex-col">

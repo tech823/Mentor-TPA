@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, cloneElement } from "react";
 import { Link } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -109,7 +109,7 @@ export default function BookDemo() {
     );
 
     return (
-        <section className="relative py-20 md:py-32 overflow-hidden bg-mentor-surface/10" data-testid="bd-page">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-mentor-surface/10" data-testid="bd-page">
             {/* Background decorative elements */}
             <div className="pointer-events-none absolute left-[-10%] top-0 h-[600px] w-[600px] rounded-full bg-mentor-blue/5 blur-[120px]" />
             <div className="absolute inset-0 mesh-hero opacity-30" />
@@ -160,7 +160,7 @@ export default function BookDemo() {
                 </div>
 
                 <div className="relative">
-                    <Reveal variant="right" className="sticky top-32">
+                    <Reveal variant="right" className="lg:sticky lg:top-[calc(var(--navbar-h)+1.5rem)]">
                         <div className="absolute -inset-1 bg-gradient-to-tr from-mentor-blue/10 via-transparent to-mentor-blue/5 blur-3xl rounded-[3rem]" />
                         <FormProvider {...methods}>
                             <form 
@@ -177,7 +177,7 @@ export default function BookDemo() {
                                 </div>
 
                                 <div className="space-y-8">
-                                    <div className="grid gap-6 md:grid-cols-2">
+                                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
                                         <FormField name="fullName" label="Full Name" placeholder="John Doe" required />
                                         <FormField name="company" label="Company Name" placeholder="e.g. Healthcare Corp" required />
                                         <FormField name="email" type="email" label="Business Email" placeholder="name@company.com" required />
@@ -230,7 +230,7 @@ function FeatureItem({ icon, title, desc }) {
     return (
         <div className="group flex gap-5 p-4 rounded-2xl transition-all hover:bg-white hover:shadow-md border border-transparent hover:border-mentor-line/50">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mentor-blue/10 text-mentor-blue transition-transform group-hover:scale-110">
-                {React.cloneElement(icon, { className: "h-5 w-5" })}
+                {cloneElement(icon, { className: "h-5 w-5" })}
             </div>
             <div>
                 <h3 className="text-sm font-bold text-mentor-black">{title}</h3>

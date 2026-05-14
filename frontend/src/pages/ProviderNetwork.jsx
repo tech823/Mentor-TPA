@@ -95,7 +95,7 @@ export default function ProviderNetwork() {
             <Eyebrow>Care categories</Eyebrow>
             <h2 className="display-2 mt-5 max-w-3xl">Network categories.</h2>
           </Reveal>
-          <div className="mt-10 grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
             {categories.map((c, i) => (
               <Reveal key={i} delay={i * 70}>
                 <div className="group rounded-2xl border border-mentor-line bg-white p-6 h-full transition hover:-translate-y-1 hover:border-mentor-black">

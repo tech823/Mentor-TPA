@@ -49,7 +49,7 @@ const SFNetworkSection = () => {
               We apply multiple layers of control to ensure every rupee of your healthcare budget is spent effectively.
             </p>
           </Reveal>
-          <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {[
               "Negotiated provider tariffs",
               "AI-driven claim validation",

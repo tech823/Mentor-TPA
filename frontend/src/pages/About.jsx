@@ -85,7 +85,7 @@ export default function About() {
             </p>
           </Reveal>
           
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {structure.map((s, i) => (
               <Reveal key={i} delay={i * 100}>
                 <div className="group relative h-full rounded-[2.5rem] border border-mentor-line bg-white p-10 transition-all hover:border-mentor-blue/30 hover:shadow-xl hover:shadow-mentor-blue/5">
@@ -185,7 +185,7 @@ export default function About() {
             <h2 className="display-2 mt-5">Values that drive us.</h2>
           </Reveal>
           
-          <div className="mt-16 grid gap-4 md:grid-cols-5">
+          <div className="mt-16 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {values.map((v, i) => (
               <Reveal key={i} delay={i * 80}>
                 <div className="group h-full rounded-[2rem] border border-mentor-line p-8 transition-all hover:-translate-y-2 hover:border-mentor-blue hover:bg-mentor-blue/[0.02]">
@@ -215,15 +215,15 @@ export default function About() {
                 Conventional TPAs rely on manual paperwork and disconnected systems. Mentor TPA is built around integrated infrastructure, real-time data visibility, and AI-enabled control. We solve the cost, infrastructure, and experience problems that define modern healthcare administration.
               </p>
               
-              <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-8">
+              <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8">
                 {[
                   { label: "Automation", val: "94%" },
                   { label: "Claims Processing", val: "Instant" },
                   { label: "Transparency", val: "Total" }
                 ].map((stat, idx) => (
                   <div key={idx}>
-                    <div className="text-3xl md:text-4xl font-bold text-white">{stat.val}</div>
-                    <div className="text-xs uppercase tracking-widest text-mentor-blue font-bold mt-2">{stat.label}</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{stat.val}</div>
+                    <div className="text-[10px] sm:text-xs uppercase tracking-widest text-mentor-blue font-bold mt-2">{stat.label}</div>
                   </div>
                 ))}
               </div>

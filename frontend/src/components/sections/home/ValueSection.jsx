@@ -36,7 +36,7 @@ const ValueSection = () => {
             Value that reaches every side of the healthcare equation.
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-4 md:grid-cols-4">
+        <div className="mt-12 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((x, i) => (
             <Reveal key={i} delay={i * 80}>
               <div className="card-hard tilt-card p-6 h-full">

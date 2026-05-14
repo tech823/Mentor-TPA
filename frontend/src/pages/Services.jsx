@@ -11,12 +11,10 @@ import {
   Wallet, 
   RefreshCw, 
   UserCheck, 
-  Network, 
-  Headphones, 
-  Heart, 
+  Network,
+  Headphones,
   ArrowRight,
   ShieldCheck,
-  Zap,
   Activity
 } from "lucide-react";
 
@@ -67,7 +65,7 @@ export default function Services() {
       </section>
 
       {/* Interactive category filter */}
-      <section className="sticky top-[72px] z-30 border-b border-mentor-line bg-white/80 backdrop-blur-xl" data-testid="serv-filter">
+      <section className="sticky top-[var(--navbar-h)] z-30 border-b border-mentor-line bg-white/80 backdrop-blur-xl" data-testid="serv-filter">
         <div className="container-edge py-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex flex-wrap gap-2">

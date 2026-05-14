@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 /**
@@ -16,10 +16,29 @@ const NoiseOverlay = () => (
 
 /**
  * LiquidGlassBg - Animated background blobs for depth
+ * Pauses animation when scrolled out of view to save GPU/CPU.
  */
 export function LiquidGlassBg({ opacity = "opacity-10", className = "" }) {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const state = entry.isIntersecting ? "running" : "paused";
+        el.querySelectorAll(".blob").forEach((b) => {
+          b.style.animationPlayState = state;
+        });
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className={`blob-container pointer-events-none ${className}`} aria-hidden="true">
+    <div ref={containerRef} className={`blob-container pointer-events-none ${className}`} aria-hidden="true">
       <div className={`blob w-[500px] h-[500px] -top-20 -left-20 bg-mentor-blue/30 blur-[100px] ${opacity}`} />
       <div
         className={`blob w-[400px] h-[400px] top-1/2 -right-20 bg-blue-400/20 blur-[120px] ${opacity}`}

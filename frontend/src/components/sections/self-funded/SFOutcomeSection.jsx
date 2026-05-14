@@ -17,7 +17,7 @@ const SFOutcomeSection = () => {
               Gain granular insights into your corporate healthcare spending with data that helps you make better financial decisions.
             </p>
           </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-12 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {[
               "Departmental spending",
               "Group-level utilization",

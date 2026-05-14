@@ -54,18 +54,22 @@ const NetworkStrengthSection = () => {
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
             {stats.map((x, i) => (
               <Reveal key={i} delay={i * 100}>
-                <div className="glow-pill rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7 transition hover:-translate-y-1 hover:border-mentor-blue/60">
+                <div className="glow-pill rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-7 transition hover:-translate-y-1 hover:border-mentor-blue/60 min-h-[130px] flex flex-col justify-between">
                   <h3 className="stat-num text-white">
                     <Counter value={x.n} />
                   </h3>
-                  <div className="mt-2 text-sm text-white/70">{x.t}</div>
+                  <div className="mt-3 text-sm text-white/70">{x.t}</div>
                 </div>
               </Reveal>
             ))}
           </div>
         </Reveal>
         
-        <div className="relative h-[400px] w-full md:h-[600px]" role="img" aria-label="Interactive 3D globe visualization showing nationwide healthcare network coverage">
+        <div
+          className="relative h-[260px] sm:h-[360px] md:h-[560px] w-full"
+          role="img"
+          aria-label="Interactive 3D globe visualization showing nationwide healthcare network coverage"
+        >
           <div className="absolute inset-0 flex items-center justify-center">
             <CobeGlobe />
           </div>

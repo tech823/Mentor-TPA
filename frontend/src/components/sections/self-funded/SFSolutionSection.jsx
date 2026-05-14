@@ -23,7 +23,7 @@ const SFSolutionSection = () => {
             <p className="lead mt-5 text-white/70 max-w-2xl">
               We provide the digital infrastructure that self-funded healthcare usually lacks, bringing order to the chaos.
             </p>
-            <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
+            <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
               {[
                 "Provider Network",
                 "Claims Control",
@@ -34,7 +34,7 @@ const SFSolutionSection = () => {
                 <Reveal key={i} delay={i * 100}>
                   <div className="flex flex-col justify-between rounded-xl border border-white/10 bg-white/[0.03] p-6 h-full transition hover:border-mentor-blue hover:bg-white/[0.08]">
                     <div className="text-sm font-bold text-mentor-blue">0{i+1}</div>
-                    <div className="mt-4 text-base font-semibold leading-tight">{x}</div>
+                    <div className="mt-4 text-base font-semibold leading-tight text-white">{x}</div>
                   </div>
                 </Reveal>
               ))}

@@ -70,7 +70,7 @@ export default function Navbar() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="start"
-                  className="mt-2 w-[280px] rounded-xl border-mentor-line p-2"
+                  className="mt-2 w-[min(280px,85vw)] rounded-xl border-mentor-line p-2"
                 >
                   {item.children.map((c) => (
                     <DropdownMenuItem
