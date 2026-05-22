@@ -21,7 +21,7 @@ export default function SolutionsOverview() {
                     <Reveal>
                         <Eyebrow>Solutions</Eyebrow>
                         <h1 className="display-1 mt-6 max-w-4xl">Healthcare solutions built for control, scale, and experience.</h1>
-                        <p className="lead mt-6 max-w-2xl">Mentor Third-Party Administrator (TPA) supports different healthcare stakeholders through tailored infrastructure and administrative models, whether you are managing employee healthcare, insurance claims operations, or healthcare delivery access.</p>
+                        <p className="lead mt-6 max-w-2xl">Mentor TPA supports different healthcare stakeholders through tailored infrastructure and administrative models, whether you are managing employee healthcare, insurance claims operations, or healthcare delivery access.</p>
                     </Reveal>
                 </div>
             </section>
@@ -47,3 +47,4 @@ export default function SolutionsOverview() {
         </>
     );
 }
+

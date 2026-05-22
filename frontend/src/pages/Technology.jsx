@@ -3,6 +3,7 @@ import CTABand from "../components/shared/CTABand";
 import Reveal from "../components/shared/Reveal";
 import MediaImage from "../components/shared/MediaImage";
 import { IMG } from "../components/shared/images";
+import { IpadFrame } from "@/components/ui/LiquidGlassComponents";
 
 const bullets = (arr) =>
   arr.map((x, i) => (
@@ -15,34 +16,36 @@ const bullets = (arr) =>
 export default function Technology() {
   return (
     <>
-      {/* Hero */}
       <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
         <div className="pointer-events-none absolute -left-24 top-10 h-80 w-80 rounded-full bg-mentor-blue/10 blur-3xl" />
-        <div className="container-fluid grid gap-10 py-20 md:grid-cols-[1.2fr,1fr] md:items-end md:py-28">
+        <div className="container-fluid grid gap-10 py-20 md:grid-cols-[1.2fr,1fr] md:items-center md:py-28">
           <Reveal>
             <Eyebrow>Technology</Eyebrow>
             <h1 className="display-1 mt-6 max-w-3xl">
-              Built on digital healthcare administration infrastructure.
+              Built on digital Healthcare Administration infrastructure.
             </h1>
             <p className="lead mt-6 max-w-2xl">
-              Mentor Third-Party Administrator (TPA) is being built as a secure,
-              scalable, and intelligence-enabled healthcare administration
-              platform for employers, insurers, providers, and members.
+              Mentor TPA is being built as a secure, scalable, and
+              intelligence-enabled Healthcare Administration platform for
+              employers, insurers, providers, and members.
             </p>
           </Reveal>
           <Reveal variant="right" delay={120}>
-            <MediaImage
-              src={IMG.techInfra}
-              alt="Secure cloud infrastructure"
-              ratio="4/3"
-              frame
-              overlay="blue"
-            />
+            <IpadFrame className="w-full !hover:transform-none">
+              <MediaImage
+                src={IMG.techInfra}
+                alt="Mentor Providers"
+                ratio="auto"
+                hover={false}
+                overlay="none"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
+              />
+            </IpadFrame>
           </Reveal>
         </div>
       </section>
 
-      {/* Digital + AI */}
       <section className="py-20 md:py-28">
         <div className="container-edge grid gap-10 md:grid-cols-2">
           <Reveal>
@@ -83,23 +86,27 @@ export default function Technology() {
         </div>
       </section>
 
-      {/* Infrastructure */}
       <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
         <div className="container-edge grid gap-12 md:grid-cols-[1fr,1.1fr] md:items-center">
           <Reveal>
-            <MediaImage
-              src={IMG.analytics}
-              alt="Analytics dashboard on laptop"
-              ratio="4/3"
-              overlay="soft"
-            />
+            <IpadFrame className="w-full !hover:transform-none">
+              <MediaImage
+                src={IMG.analytics}
+                alt="Mentor analytics"
+                ratio="auto"
+                hover={false}
+                overlay="none"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
+              />
+            </IpadFrame>
           </Reveal>
           <Reveal variant="right" delay={120}>
             <Eyebrow>Infrastructure</Eyebrow>
             <h2 className="display-2 mt-5 max-w-3xl">
               Secure and scalable technology infrastructure.
             </h2>
-            <ul className="mt-8 grid gap-3 grid-cols-1 sm:grid-cols-2">
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {[
                 "secure cloud-based systems",
                 "encrypted communication",
@@ -119,7 +126,6 @@ export default function Technology() {
         </div>
       </section>
 
-      {/* Dark CTA block */}
       <section className="relative overflow-hidden border-y border-mentor-line bg-mentor-black py-20 text-white md:py-28 grid-dark">
         <div
           className="pointer-events-none absolute inset-0"
@@ -134,13 +140,16 @@ export default function Technology() {
               <span className="text-mentor-blue">Why this matters</span>
             </Eyebrow>
             <h2 className="display-2 mt-5 text-white">
-              Technology is no longer optional in healthcare administration.
+              Technology is no longer optional in Healthcare Administration.
             </h2>
-            <p className="lead mt-5 text-white/75">
-              Healthcare administration today demands more than manpower. It
+            <p
+              className="lead mt-5"
+              style={{ color: "rgba(255,255,255,0.75)" }}
+            >
+              Healthcare Administration today demands more than manpower. It
               requires data visibility, process control, fraud resistance, and
               scalable execution. Technology is the only sensible way to do that
-              without drowning in operational sprawl. Healthcare administration
+              without drowning in operational sprawl. Healthcare Administration
               run on spreadsheets is not strategy. It is just organized panic.
             </p>
           </Reveal>

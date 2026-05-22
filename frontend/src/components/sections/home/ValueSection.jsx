@@ -24,7 +24,7 @@ const values = [
 const ValueSection = () => {
   return (
     <section
-      className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28"
+      className="border-y border-mentor-line bg-mentor-surface py-12 sm:py-16 md:py-28"
       data-testid="home-value"
       role="region"
       aria-label="Value to Stakeholders"
@@ -36,10 +36,10 @@ const ValueSection = () => {
             Value that reaches every side of the healthcare equation.
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 md:mt-12 grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
           {values.map((x, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="card-hard tilt-card p-6 h-full">
+              <div className="card-hard tilt-card p-5 sm:p-6 h-full">
                 <h3 className="eyebrow">{x.r}</h3>
                 <p className="mt-3 text-[15px] font-semibold leading-snug">
                   {x.v}

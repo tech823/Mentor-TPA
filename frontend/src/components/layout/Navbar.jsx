@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navItems = [
-  { to: "/about", label: "About" },
   {
     label: "Solutions",
     children: [
@@ -21,13 +20,14 @@ const navItems = [
   { to: "/services", label: "Services" },
   { to: "/technology", label: "Technology" },
   { to: "/provider-network", label: "Provider Network" },
+  { to: "https://mentorclubglobal.com/", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
 
 function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2" data-testid="nav-logo">
-      <img src="/Logo.png" alt="Mentor Third-Party Administrator (TPA)" className="h-10 w-auto" />
+      <img src="/Logo.png" alt="Mentor TPA" className="h-12 w-auto" />
     </Link>
   );
 }
@@ -48,10 +48,11 @@ export default function Navbar() {
   return (
     <header
       data-testid="site-navbar"
-      className={`sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md transition-all ${scrolled ? "border-b border-mentor-line" : "border-b border-transparent"}`}
+      className={`sticky top-0 z-[9999] w-full bg-white/90 backdrop-blur-md transition-all will-change-auto ${scrolled ? "border-b border-mentor-line shadow-sm" : "border-b border-transparent"}`}
+      style={{ position: 'sticky', top: 0 }}
       role="banner"
     >
-      <div className="container-edge flex h-[72px] items-center justify-between">
+      <div className="container-fluid flex h-[72px] items-center justify-between">
         <Logo />
         <nav
           className="hidden items-center gap-6 lg:flex"
@@ -60,17 +61,18 @@ export default function Navbar() {
         >
           {navItems.map((item) =>
             item.children ? (
-              <DropdownMenu key={item.label}>
+              <DropdownMenu key={item.label} modal={false}>
                 <DropdownMenuTrigger
                   className="flex items-center gap-1 text-sm font-semibold text-mentor-black/80 outline-none transition hover:text-mentor-black focus-visible:ring-2 focus-visible:ring-mentor-blue focus-visible:ring-offset-2 rounded-md px-1"
                   data-testid={`nav-${item.label.toLowerCase()}`}
                   aria-label={`${item.label} submenu`}
                 >
-                  {item.label} <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
+                  {item.label}{" "}
+                  <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="start"
-                  className="mt-2 w-[min(280px,85vw)] rounded-xl border-mentor-line p-2"
+                  className="mt-2 w-[260px] sm:w-[280px] max-w-[90vw] rounded-xl border-mentor-line p-2"
                 >
                   {item.children.map((c) => (
                     <DropdownMenuItem
@@ -88,6 +90,23 @@ export default function Navbar() {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
+            ) : item.to.startsWith("http") ? (
+              <a
+                key={item.to}
+                href={item.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid={`nav-link-external-${item.label.toLowerCase()}`}
+                className="text-sm font-semibold text-mentor-black/70 hover:text-mentor-black transition focus-visible:ring-2 focus-visible:ring-mentor-blue focus-visible:ring-offset-2 rounded-md px-1"
+              >
+                <span className="flex items-center gap-0.5">
+                  {item.label}
+                  <ArrowUpRight
+                    className="h-3 w-3 opacity-50"
+                    aria-hidden="true"
+                  />
+                </span>
+              </a>
             ) : (
               <NavLink
                 key={item.to}
@@ -116,7 +135,10 @@ export default function Navbar() {
             className="group inline-flex items-center gap-1.5 rounded-full bg-mentor-black px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-mentor-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mentor-blue focus-visible:ring-offset-2"
           >
             Get a Proposal{" "}
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
           </Link>
         </div>
         <button
@@ -137,36 +159,57 @@ export default function Navbar() {
       {mobileOpen && (
         <div
           id="mobile-menu"
-          className="border-t border-mentor-line bg-white lg:hidden"
+          className="border-t border-mentor-line bg-white lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto"
           data-testid="nav-mobile-panel"
           role="navigation"
           aria-label="Mobile Navigation"
         >
-          <div className="container-edge flex flex-col gap-1 py-4">
+          <div className="container-fluid flex flex-col gap-1 py-4">
             {navItems.map((item) =>
               item.children ? (
                 <details key={item.label} className="group">
-                  <summary 
+                  <summary
                     className="flex cursor-pointer list-none items-center justify-between py-3.5 text-base font-semibold focus-visible:text-mentor-blue outline-none"
                     aria-label={`Toggle ${item.label} sub-menu`}
                   >
                     {item.label}{" "}
-                    <ChevronDown className="h-4 w-4 transition group-open:rotate-180" aria-hidden="true" />
+                    <ChevronDown
+                      className="h-4 w-4 transition group-open:rotate-180"
+                      aria-hidden="true"
+                    />
                   </summary>
                   <div className="flex flex-col gap-1 pl-3 pb-2">
                     {item.children.map((c) => (
-                        <Link
-                          key={c.to}
-                          to={c.to}
-                          className="py-3.5 text-sm text-mentor-black/70 hover:text-mentor-black focus-visible:text-mentor-blue outline-none min-h-[44px] flex items-center"
-                          data-testid={`m-nav-${c.to.replace(/[\/\#]/g, "-")}`}
-                          aria-label={`View solution: ${c.label}`}
-                        >
-                          {c.label}
-                        </Link>
+                      <Link
+                        key={c.to}
+                        to={c.to}
+                        className="py-3.5 text-sm text-mentor-black/70 hover:text-mentor-black focus-visible:text-mentor-blue outline-none min-h-[44px] flex items-center"
+                        data-testid={`m-nav-${c.to.replace(/[\/\#]/g, "-")}`}
+                        aria-label={`View solution: ${c.label}`}
+                      >
+                        {c.label}
+                      </Link>
                     ))}
                   </div>
                 </details>
+              ) : item.to.startsWith("http") ? (
+                <a
+                  key={item.to}
+                  href={item.to}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3.5 text-base font-semibold hover:text-mentor-blue focus-visible:text-mentor-blue outline-none"
+                  data-testid={`m-nav-external-${item.label.toLowerCase()}`}
+                >
+                  <span className="flex items-center gap-1">
+                    {item.label}
+                    <ArrowUpRight
+                      className="h-5 w-5 "
+                      color="black"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </a>
               ) : (
                 <Link
                   key={item.to}

@@ -14,6 +14,7 @@ import Reveal from "../components/shared/Reveal";
 import Counter from "../components/shared/Counter";
 import MediaImage from "../components/shared/MediaImage";
 import { IMG } from "../components/shared/images";
+import { IpadFrame } from "@/components/ui/LiquidGlassComponents";
 
 const stats = [
   ["300+", "hospitals"],
@@ -35,14 +36,14 @@ export default function ProviderNetwork() {
     <>
       <section className="relative overflow-hidden border-b border-mentor-line mesh-hero">
         <div className="pointer-events-none absolute right-[-120px] top-[-60px] h-96 w-96 rounded-full bg-mentor-blue/10 blur-3xl" />
-        <div className="container-fluid grid gap-10 py-20 md:grid-cols-[1.1fr,1fr] md:items-end md:py-28">
+        <div className="container-fluid grid gap-10 py-20 md:grid-cols-[1.1fr,1fr] md:items-center md:py-28">
           <Reveal>
             <Eyebrow>Provider Network</Eyebrow>
             <h1 className="display-1 mt-6 max-w-3xl">
               Nationwide healthcare network.
             </h1>
             <p className="lead mt-6 max-w-2xl">
-              Mentor Third-Party Administrator (TPA) connects clients and members to a structured provider
+              Mentor TPA connects clients and members to a structured provider
               network spanning hospitals, doctors, diagnostics, and pharmacies
               across Pakistan.
             </p>
@@ -55,13 +56,17 @@ export default function ProviderNetwork() {
             </Link>
           </Reveal>
           <Reveal variant="right" delay={120}>
-            <MediaImage
-              src={IMG.hospitalExterior}
-              alt="Modern hospital exterior"
-              ratio="4/3"
-              frame
-              overlay="soft"
-            />
+            <IpadFrame className="w-full !hover:transform-none">
+              <MediaImage
+                src={IMG.hospitalExterior}
+                alt="Modern hospital exterior"
+                ratio="auto"
+                hover={false}
+                overlay="soft"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
+              />
+            </IpadFrame>
           </Reveal>
         </div>
       </section>
@@ -98,8 +103,8 @@ export default function ProviderNetwork() {
           <div className="mt-10 grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
             {categories.map((c, i) => (
               <Reveal key={i} delay={i * 70}>
-                <div className="group rounded-2xl border border-mentor-line bg-white p-6 h-full transition hover:-translate-y-1 hover:border-mentor-black">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-black text-white transition group-hover:bg-mentor-blue">
+                <div className="group rounded-2xl border  bg-white p-6 h-full transition hover:-translate-y-1 hover:border-mentor-black">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-mentor-white text-mentor-blue transition group-hover:bg-mentor-blue">
                     <c.i className="h-5 w-5" />
                   </div>
                   <div className="mt-4 text-sm font-bold capitalize">{c.t}</div>
@@ -122,25 +127,35 @@ export default function ProviderNetwork() {
             </p>
           </Reveal>
           <Reveal variant="right" delay={120}>
-            <MediaImage
-              src={IMG.lab}
-              alt="Diagnostic laboratory"
-              ratio="4/3"
-              overlay="soft"
-            />
+            <IpadFrame className="w-full !hover:transform-none">
+              <MediaImage
+                src={IMG.lab}
+                alt="Modern lab"
+                ratio="auto"
+                hover={false}
+                overlay="soft"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
+              />
+            </IpadFrame>
           </Reveal>
         </div>
       </section>
 
       <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
         <div className="container-edge grid gap-10 md:grid-cols-2 md:items-center">
-          <Reveal>
-            <MediaImage
-              src={IMG.worldMap}
-              alt="Coverage map"
-              ratio="4/3"
-              overlay="soft"
-            />
+          <Reveal variant="right" delay={120}>
+            <IpadFrame className="w-full !hover:transform-none">
+              <MediaImage
+                src={IMG.worldMap}
+                alt="Pakistan coverage map"
+                ratio="auto"
+                hover={false}
+                overlay="soft"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
+              />
+            </IpadFrame>
           </Reveal>
           <Reveal variant="right" delay={120}>
             <Eyebrow>Geographic coverage</Eyebrow>

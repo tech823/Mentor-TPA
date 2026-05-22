@@ -15,7 +15,7 @@ const audiences = [
   {
     icon: ShieldCheck,
     title: "For Insurance Companies",
-    copy: "Scale claims operations and provider coordination without expanding internal complexity. Mentor Third-Party Administrator (TPA) provides claims and network infrastructure built for speed, control, and growth.",
+    copy: "Scale claims operations and provider coordination without expanding internal complexity. Mentor TPA provides claims and network infrastructure built for speed, control, and growth.",
     cta: "See Insurance Solution",
     to: "/solutions/insurance",
   },
@@ -30,7 +30,7 @@ const audiences = [
 
 const StakeholderSection = () => {
   return (
-    <section className="py-20 md:py-28" data-testid="home-audience" role="region" aria-label="Healthcare Stakeholders">
+    <section className="py-12 sm:py-16 md:py-28" data-testid="home-audience" role="region" aria-label="Healthcare Stakeholders">
       <div className="container-edge">
         <Reveal className="max-w-xl">
           <Eyebrow>Audience split</Eyebrow>
@@ -38,10 +38,10 @@ const StakeholderSection = () => {
             Built for every major healthcare stakeholder.
           </h2>
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 md:mt-12 grid gap-4 md:gap-5 md:grid-cols-3">
           {audiences.map((a, i) => (
             <Reveal key={i} delay={i * 100}>
-              <div className="card-hard tilt-card flex h-full flex-col justify-between p-7">
+              <div className="card-hard tilt-card flex h-full flex-col justify-between p-5 sm:p-6 md:p-7">
                 <div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-mentor-line" aria-hidden="true">
                     <a.icon className="h-5 w-5 text-mentor-blue" />
@@ -70,3 +70,4 @@ const StakeholderSection = () => {
 };
 
 export default React.memo(StakeholderSection);
+

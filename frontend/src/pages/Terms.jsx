@@ -8,7 +8,7 @@ export default function Terms() {
                 <h1 className="display-2 mt-5">Terms of Use</h1>
                 <p className="mt-4 text-sm text-mentor-muted">Last updated: {new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</p>
                 <div className="prose prose-sm mt-10 space-y-5 text-[15px] leading-relaxed text-mentor-ink">
-                    <p>This page is a placeholder. Formal Terms of Use governing access to the Mentor Third-Party Administrator (TPA) website and associated services will be published here.</p>
+                    <p>This page is a placeholder. Formal Terms of Use governing access to the Mentor TPA website and associated services will be published here.</p>
                     <h2 className="text-xl font-extrabold pt-4">Use of this website</h2>
                     <p>The Mentor TPA website is provided for informational and commercial-inquiry purposes. Content is not medical advice and is not a substitute for a clinical consultation.</p>
                     <h2 className="text-xl font-extrabold pt-4">Intellectual property</h2>
@@ -20,3 +20,4 @@ export default function Terms() {
         </section>
     );
 }
+

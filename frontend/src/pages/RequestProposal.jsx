@@ -1,4 +1,4 @@
-import { useState, cloneElement } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,7 +60,6 @@ export default function RequestProposal() {
         try {
             // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1800));
-            console.log("Proposal Request:", data);
             setSubmitted(true);
             toast.success("Proposal request successfully transmitted.");
         } catch (error) {
@@ -128,7 +127,7 @@ export default function RequestProposal() {
     );
 
     return (
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-mentor-surface/10" data-testid="rp-page">
+        <section className="relative py-20 md:py-32 overflow-hidden bg-mentor-surface/10" data-testid="rp-page">
             {/* Background elements */}
             <div className="pointer-events-none absolute right-[-10%] top-0 h-[600px] w-[600px] rounded-full bg-mentor-blue/5 blur-[120px]" />
             <div className="pointer-events-none absolute left-[-5%] bottom-0 h-[400px] w-[400px] rounded-full bg-mentor-blue/5 blur-[100px]" />
@@ -179,7 +178,7 @@ export default function RequestProposal() {
                 </div>
 
                 <div className="relative">
-                    <Reveal variant="right" className="lg:sticky lg:top-32">
+                    <Reveal variant="right">
                         <div className="absolute -inset-1 bg-gradient-to-tr from-mentor-blue/10 via-transparent to-mentor-blue/5 blur-3xl rounded-[3rem]" />
                         <FormProvider {...methods}>
                             <form 
@@ -196,7 +195,7 @@ export default function RequestProposal() {
                                 </div>
 
                                 <div className="space-y-8">
-                                    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+                                    <div className="grid gap-6 md:grid-cols-2">
                                         <FormField name="company" label="Company Name" placeholder="e.g. Global Tech Solutions" required />
                                         <FormField name="industry" label="Industry Sector" placeholder="e.g. Healthcare, Finance" />
                                         <FormField name="contact" label="Contact Person" placeholder="Full name" required />
@@ -247,7 +246,7 @@ function FeatureItem({ icon, title, desc }) {
     return (
         <div className="group flex gap-4 p-4 rounded-2xl border border-transparent transition-all hover:border-mentor-line hover:bg-white hover:shadow-sm">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-mentor-blue/10 text-mentor-blue shadow-inner transition-transform group-hover:scale-110">
-                {cloneElement(icon, { className: "h-5 w-5" })}
+                {React.cloneElement(icon, { className: "h-5 w-5" })}
             </div>
             <div>
                 <h3 className="text-sm font-bold text-mentor-black">{title}</h3>

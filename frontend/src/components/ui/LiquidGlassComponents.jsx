@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 /**
@@ -16,36 +16,17 @@ const NoiseOverlay = () => (
 
 /**
  * LiquidGlassBg - Animated background blobs for depth
- * Pauses animation when scrolled out of view to save GPU/CPU.
  */
 export function LiquidGlassBg({ opacity = "opacity-10", className = "" }) {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const state = entry.isIntersecting ? "running" : "paused";
-        el.querySelectorAll(".blob").forEach((b) => {
-          b.style.animationPlayState = state;
-        });
-      },
-      { threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={containerRef} className={`blob-container pointer-events-none ${className}`} aria-hidden="true">
-      <div className={`blob w-[500px] h-[500px] -top-20 -left-20 bg-mentor-blue/30 blur-[100px] ${opacity}`} />
+    <div className={`blob-container pointer-events-none ${className}`} aria-hidden="true">
+      <div className={`blob w-[280px] sm:w-[400px] md:w-[500px] h-[280px] sm:h-[400px] md:h-[500px] -top-20 -left-20 bg-mentor-blue/30 blur-[100px] ${opacity}`} />
       <div
-        className={`blob w-[400px] h-[400px] top-1/2 -right-20 bg-blue-400/20 blur-[120px] ${opacity}`}
+        className={`blob w-[240px] sm:w-[320px] md:w-[400px] h-[240px] sm:h-[320px] md:h-[400px] top-1/2 -right-20 bg-blue-400/20 blur-[120px] ${opacity}`}
         style={{ animationDelay: "2s" }}
       />
       <div
-        className={`blob w-[300px] h-[300px] bottom-0 left-1/3 bg-indigo-500/10 blur-[80px] ${opacity}`}
+        className={`blob w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] bottom-0 left-1/3 bg-indigo-500/10 blur-[80px] ${opacity}`}
         style={{ animationDelay: "4s" }}
       />
     </div>
@@ -160,8 +141,8 @@ export function IphoneFrame({ children, className = "" }) {
       onMouseLeave={handleMouseLeave}
     >
       <div className="iphone-dynamic-island">
-        <div className="w-12 h-1 bg-white/5 rounded-full" />
-        <div className="iphone-island-dot" />
+        <div className="w-10 h-1 bg-white/5 rounded-full" />
+        <div className="w-1.5 h-1.5 rounded-full bg-[#111] absolute right-6 shadow-inner" />
       </div>
       <div className="iphone-screen">
         <div className="relative h-full w-full bg-white overflow-hidden">
@@ -182,6 +163,70 @@ export function IphoneFrame({ children, className = "" }) {
       <div className="absolute -left-[2px] top-40 w-[2px] h-16 bg-gradient-to-b from-[#222] to-[#444] rounded-l-sm" />
       <div className="absolute -left-[2px] top-60 w-[2px] h-16 bg-gradient-to-b from-[#222] to-[#444] rounded-l-sm" />
       <div className="absolute -right-[2px] top-48 w-[2px] h-24 bg-gradient-to-b from-[#222] to-[#444] rounded-r-sm" />
+    </motion.div>
+  );
+}
+
+/**
+ * IpadFrame - High-fidelity iPad mockup with 3D Tilt
+ */
+export function IpadFrame({ children, className = "" }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["3deg", "-3deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-3deg", "3deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      className={`ipad-frame group ${className}`}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="ipad-screen">
+        <div className="relative h-full w-full bg-black overflow-hidden shadow-inner">
+          {children}
+          <NoiseOverlay />
+          {/* Reflection */}
+          <motion.div 
+            className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-white/20 opacity-0 group-hover:opacity-40 transition-opacity duration-500 z-40"
+            style={{
+              x: useTransform(mouseXSpring, [-0.5, 0.5], ["-10%", "10%"]),
+              y: useTransform(mouseYSpring, [-0.5, 0.5], ["-10%", "10%"]),
+            }}
+          />
+        </div>
+      </div>
+      
+      {/* Physical Buttons */}
+      <div className="absolute top-1/2 -translate-y-1/2 left-[10px] w-1 h-1 rounded-full bg-white/20 z-50" /> {/* Front Camera Dot */}
+      <div className="ipad-button-vol" />
+      <div className="ipad-button-power" />
     </motion.div>
   );
 }

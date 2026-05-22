@@ -6,8 +6,8 @@ import BulletList from '../../shared/BulletList';
 const SFChallengeSection = () => {
   return (
     <>
-      <section className="py-20 md:py-28">
-        <div className="container-edge grid gap-10 md:grid-cols-2">
+      <section className="py-12 sm:py-16 md:py-28">
+        <div className="container-edge grid gap-8 md:gap-10 md:grid-cols-2">
           <Reveal>
             <Eyebrow>The problem</Eyebrow>
             <h2 className="display-2 mt-5">
@@ -20,7 +20,7 @@ const SFChallengeSection = () => {
             </p>
           </Reveal>
           <Reveal variant="right" delay={120}>
-            <div className="rounded-2xl border border-mentor-line p-8 glass-surface">
+            <div className="rounded-2xl border border-mentor-line p-5 sm:p-6 md:p-8 glass-surface">
               <BulletList items={[
                 "Rising healthcare costs without clear ROI",
                 "Zero visibility into actual claim data",
@@ -34,7 +34,7 @@ const SFChallengeSection = () => {
         </div>
       </section>
 
-      <section className="border-y border-mentor-line bg-mentor-surface py-20 md:py-28">
+      <section className="border-y border-mentor-line bg-mentor-surface py-12 sm:py-16 md:py-28">
         <div className="container-edge">
           <Reveal className="max-w-3xl">
             <Eyebrow>Why current models fail</Eyebrow>
@@ -42,9 +42,9 @@ const SFChallengeSection = () => {
               Legacy healthcare models are fundamentally broken.
             </h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
+          <div className="mt-8 md:mt-10 grid gap-4 md:gap-5 md:grid-cols-2">
             <Reveal>
-              <div className="rounded-2xl border border-mentor-line bg-white p-8 h-full shadow-sm transition hover:shadow-md">
+              <div className="rounded-2xl border border-mentor-line bg-white p-5 sm:p-6 md:p-8 h-full shadow-sm transition hover:shadow-md">
                 <div className="text-xl font-bold text-mentor-black">Insurance Model</div>
                 <BulletList className="mt-6" items={[
                   "Fixed premium models regardless of actual usage",
@@ -69,7 +69,7 @@ const SFChallengeSection = () => {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
+      <section className="py-12 sm:py-16 md:py-28">
         <div className="container-edge">
           <Reveal>
             <Eyebrow>Hidden cost problem</Eyebrow>

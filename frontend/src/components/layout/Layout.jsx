@@ -15,7 +15,7 @@ export default function Layout() {
                 Skip to content
             </a>
             <Navbar />
-            <main id="main-content" className="flex-1" data-testid="site-main">
+            <main id="main-content" className="flex-1 overflow-x-hidden" data-testid="site-main">
                 <Outlet />
             </main>
             <Footer />

@@ -23,8 +23,8 @@ const problems = [
 
 const ProblemSection = () => {
   return (
-    <section 
-      className="py-20 md:py-28" 
+    <section
+      className="py-12 sm:py-16 md:py-28"
       data-testid="home-problem"
       role="region"
       aria-label="The Problem"
@@ -33,10 +33,10 @@ const ProblemSection = () => {
         <Reveal className="max-w-3xl">
           <Eyebrow>The market problem</Eyebrow>
           <h2 className="display-2 mt-5">
-            Healthcare administration is still broken.
+            Healthcare Administration is still broken.
           </h2>
           <p className="lead mt-5">
-            Across Pakistan, healthcare administration remains fragmented
+            Across Pakistan, Healthcare Administration remains fragmented
             across employers, insurers, providers, and patients. Most systems
             still depend on manual coordination, disconnected providers,
             paperwork-heavy claims, low visibility, and delayed decisions. The
@@ -44,10 +44,10 @@ const ProblemSection = () => {
             poor member experience.
           </p>
         </Reveal>
-        <div className="mt-12 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 md:mt-12 grid gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-4">
           {problems.map((c, i) => (
             <Reveal key={i} delay={i * 90}>
-              <div className="card-hard tilt-card p-7 h-full">
+              <div className="card-hard tilt-card p-5 sm:p-6 md:p-7 h-full">
                 <div className="eyebrow">0{i + 1}</div>
                 <h3 className="mt-3 text-xl font-extrabold tracking-tight">
                   {c.t}
@@ -60,8 +60,8 @@ const ProblemSection = () => {
           ))}
         </div>
         <p className="container-edge mx-auto mt-10 max-w-3xl px-0 text-sm text-mentor-muted">
-          Mentor Third-Party Administrator (TPA) exists to replace fragmented legacy systems with one
-          integrated healthcare operating layer.
+          Mentor TPA exists to replace fragmented legacy systems with one
+          integrated Healthcare Administration layer.
         </p>
       </div>
     </section>

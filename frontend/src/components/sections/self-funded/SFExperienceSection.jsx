@@ -1,10 +1,10 @@
-import React from 'react';
-import Reveal from '../../shared/Reveal';
-import { Eyebrow } from '../../shared/Eyebrow';
-import BulletList from '../../shared/BulletList';
-import MediaImage from '../../shared/MediaImage';
-import { IMG } from '../../shared/images';
-import { MacbookFrame } from '../../ui/LiquidGlassComponents';
+import React from "react";
+import Reveal from "../../shared/Reveal";
+import { Eyebrow } from "../../shared/Eyebrow";
+import BulletList from "../../shared/BulletList";
+import MediaImage from "../../shared/MediaImage";
+import { IMG } from "../../shared/images";
+import { IpadFrame, MacbookFrame } from "../../ui/LiquidGlassComponents";
 
 const SFExperienceSection = () => {
   return (
@@ -17,29 +17,34 @@ const SFExperienceSection = () => {
               No paperwork. No delays. Just digital clarity.
             </h2>
             <p className="lead mt-5 text-mentor-muted">
-              Mentor Third-Party Administrator (TPA) digitizes the entire experience for both employers and
+              Mentor TPA digitizes the entire experience for both employers and
               employees, removing the friction from healthcare.
             </p>
             <div className="mt-10">
-              <BulletList items={[
-                "Fully digital claim submission",
-                "Mobile-first member portal",
-                "Real-time tracking of every request",
-                "Seamless cashless treatment flows",
-                "Centralized member health profiles",
-                "Executive dashboards for visibility"
-              ]} />
+              <BulletList
+                items={[
+                  "Fully digital claim submission",
+                  "Mobile-first member portal",
+                  "Real-time tracking of every request",
+                  "Seamless cashless treatment flows",
+                  "Centralized member health profiles",
+                  "Executive dashboards for visibility",
+                ]}
+              />
             </div>
           </Reveal>
-          <Reveal variant="right" delay={200}>
-            <MacbookFrame className="max-w-2xl mx-auto">
+          <Reveal variant="right" delay={120}>
+            <IpadFrame className="w-full !hover:transform-none">
               <MediaImage
-                src={IMG.doctorTablet}
-                alt="Digital clinician workflow"
-                ratio="16/10"
-                overlay="soft"
+                src={IMG.DigitalExperience}
+                alt="Mentor Digital Experience"
+                ratio="auto"
+                hover={false}
+                overlay="none"
+                className="h-full w-full !border-0 rounded-none bg-black"
+                imgClass="object-cover"
               />
-            </MacbookFrame>
+            </IpadFrame>
           </Reveal>
         </div>
       </section>
@@ -52,7 +57,10 @@ const SFExperienceSection = () => {
               Your HR team should not be running a hospital desk.
             </h2>
             <p className="lead mt-5 text-mentor-muted leading-relaxed">
-              We handle the heavy lifting—claims processing, provider coordination, and employee healthcare queries—so your teams can focus on strategic decision-making instead of operational firefighting.
+              We handle the heavy lifting—claims processing, provider
+              coordination, and employee healthcare queries—so your teams can
+              focus on strategic decision-making instead of operational
+              firefighting.
             </p>
           </Reveal>
           <Reveal delay={200}>
@@ -60,21 +68,43 @@ const SFExperienceSection = () => {
             <h2 className="display-2 mt-5">A superior healthcare journey.</h2>
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div className="rounded-2xl border border-mentor-line p-6 glass-surface transition hover:shadow-lg">
-                <div className="text-xs font-bold uppercase tracking-widest text-mentor-muted">Before</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-mentor-muted">
+                  Before
+                </div>
                 <ul className="mt-4 space-y-3">
-                  {["Pay upfront", "Submit paperwork", "Weeks of waiting", "High stress"].map((x) => (
-                    <li key={x} className="flex items-center gap-2 text-sm text-mentor-muted line-through opacity-50">
-                      <span className="h-1 w-1 rounded-full bg-mentor-muted" /> {x}
+                  {[
+                    "Pay upfront",
+                    "Submit paperwork",
+                    "Weeks of waiting",
+                    "High stress",
+                  ].map((x) => (
+                    <li
+                      key={x}
+                      className="flex items-center gap-2 text-sm text-mentor-muted line-through opacity-50"
+                    >
+                      <span className="h-1 w-1 rounded-full bg-mentor-muted" />{" "}
+                      {x}
                     </li>
                   ))}
                 </ul>
               </div>
               <div className="rounded-2xl border border-mentor-blue bg-mentor-blue/[0.03] p-6 shadow-sm transition hover:shadow-lg">
-                <div className="text-xs font-bold uppercase tracking-widest text-mentor-blue">After Mentor</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-mentor-blue">
+                  After Mentor
+                </div>
                 <ul className="mt-4 space-y-3">
-                  {["Walk in freely", "Get treated", "Track digitally", "Zero friction"].map((x) => (
-                    <li key={x} className="flex items-center gap-2 text-sm font-bold text-mentor-black">
-                      <span className="h-1.5 w-1.5 rounded-full bg-mentor-blue" /> {x}
+                  {[
+                    "Walk in freely",
+                    "Get treated",
+                    "Track digitally",
+                    "Zero friction",
+                  ].map((x) => (
+                    <li
+                      key={x}
+                      className="flex items-center gap-2 text-sm font-bold text-mentor-black"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-mentor-blue" />{" "}
+                      {x}
                     </li>
                   ))}
                 </ul>

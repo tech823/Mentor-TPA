@@ -18,7 +18,7 @@ const SFSolutionSection = () => {
               <span className="text-mentor-blue">Mentor solution</span>
             </Eyebrow>
             <h2 className="display-2 mt-5 text-white max-w-4xl">
-              Mentor Third-Party Administrator (TPA) converts self-funded healthcare into a managed system.
+              Mentor TPA converts self-funded healthcare into a managed system.
             </h2>
             <p className="lead mt-5 text-white/70 max-w-2xl">
               We provide the digital infrastructure that self-funded healthcare usually lacks, bringing order to the chaos.
@@ -93,3 +93,4 @@ const SFSolutionSection = () => {
 };
 
 export default React.memo(SFSolutionSection);
+
